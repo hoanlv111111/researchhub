@@ -1,0 +1,145 @@
+.comment_input {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background: rgb(255, 255, 255);
+}
+
+.comment_input input {
+    background: white;
+    border: none;
+    outline: none;
+    flex: 1;
+    overflow: auto;
+}
+
+.comment_input .postBtn {
+    font-size: 20px;
+    border-radius: 15%;
+    border: none;
+    outline: none;
+    background: white;
+    color: black;
+    font-weight: 600;
+}
+
+.comment_input .dropdown-menu {
+    transform: translate3d(-120px, -200px, 0px) !important;
+}
+
+/* ---------- Comments ---------- */
+.comment_display {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 15px;
+}
+
+
+.comment_card .comment_card-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    padding-bottom: 5px;
+}
+
+.comment_card .comment_card-content .comment_card-user {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    color: gray;
+    padding: 5px;
+}
+
+.comment_card .comment_content1 {
+    background: #ddd;
+    padding: 8px 12px;
+    margin-left: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: left;
+}
+
+.comment_card .comment_content2 {
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    align-items: center;
+}
+
+.comment_card .comment_content3 {
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.comment_card .comment_content3 .comment_time {
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.comment_card .comment_content3 .comment_content2 .comment_content1 h6 {
+    margin-left: 0;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-size: 16px;
+    color: black;
+}
+
+.comment_card .comment_content3 .comment_content2 .comment_content1 h6:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.comment_card .comment_content3 .comment_content2 .comment_content1 .comment_content-user {
+    font-size: 12px;
+    color: gray;
+    padding: 0;
+}
+
+.comment_card .comment_content3 .comment_content2 .comment_content1 .comment_content-user span {
+    font-size: 16px;
+    color: black;
+    padding: 0;
+}
+
+.comment_card .comment_content .readMore {
+    cursor: pointer;
+    color: tomato;
+}
+
+.comment_card .comment_content3 .comment_content2 .nav-item {
+    cursor: pointer;
+    opacity: 0;
+}
+
+.comment_card .comment_content3 .comment_content2:hover .nav-item {
+    opacity: 1;
+    background-color: #ddd;
+    border-radius: 50%;
+}
+
+.comment_card .comment_content3 .comment_content2 .dropdown-menu {
+    position: absolute;
+    right: 0;
+    left: inherit;
+}
+
+.comment_card .comment_content3 .comment_content2 .dropdown-item {
+    display: flex;
+    margin: 10px 0;
+}
+
+.comment_card .comment_content3 .comment_content2 textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+}
