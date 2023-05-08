@@ -8,7 +8,7 @@ const Followers = ({ users, setShowFollowers }) => {
     return (
         <div className="follow">
             <div className="follow_box">
-                <h5 className="text-center">Followers</h5>
+                <h5 className="text-center" style={{ fontFamily: "inherit", fontSize: "20px" }}>Followers</h5>
                 <hr />
 
                 <div className="follow_content">

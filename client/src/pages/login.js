@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Link, useHistory } from "react-router-dom"
 import { login } from "../redux/actions/authAction"
 import { useDispatch, useSelector } from "react-redux"
-
+import GoogleLogin from 'react-google-login';
 
 const Login = () => {
     const initialState = { email: "", password: "" }
@@ -28,7 +28,20 @@ const Login = () => {
         e.preventDefault()
         dispatch(login(userData))
     }
+    const clientId = '60870770582-lk0g9gm79s39ou1t0vm0maorgu1v9o0l.apps.googleusercontent.com';
+    const handleGoogleLoginSuccess = (response) => {
+        // Dispatch the login action with the user data received from Google
+        const { tokenId, profileObj } = response;
+        dispatch(login({
+            email: profileObj.email,
+            password: tokenId,
+            name: profileObj.name
+        }));
+    };
 
+    const handleGoogleLoginFailure = (error) => {
+        console.log("Google Login Failed: ", error);
+    };
     return (
         <div className="auth_page">
             <form onSubmit={handleSubmit}>
@@ -68,6 +81,15 @@ const Login = () => {
                 <p className="my-2">
                     You don"t have an account? <Link to="/register" style={{ color: "tomato" }}>Register Now</Link>
                 </p>
+                <button type="submit" className="google_login">
+                    <GoogleLogin
+                        clientId={clientId}
+                        buttonText="Login with Google"
+                        onSuccess={handleGoogleLoginSuccess}
+                        onFailure={handleGoogleLoginFailure}
+                        cookiePolicy={'single_host_origin'}
+                    />
+                </button>
             </form>
         </div>
     )

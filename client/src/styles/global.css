@@ -7,7 +7,6 @@
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
 }
 
 body,
@@ -30,8 +29,13 @@ code {
 
 .App {
   width: 100%;
-  min-height: 100vh;
-  background: white;
+  /* min-height: 100vh; */
+  background-color: white;
+}
+
+.App .header {
+  width: 100%;
+  position: sticky;
 }
 
 .main {
@@ -39,12 +43,14 @@ code {
   width: 100%;
   min-height: 100vh;
   margin: auto;
+  background-color: white
 }
 
 img {
-  width: 500px;
-  height: 500px;
-  object-fit: cover;
+  width: 300px;
+  height: 300px;
+  aspect-ratio: 3/2;
+  object-fit: contain;
 }
 
 /* -------- AUTH ---------- */

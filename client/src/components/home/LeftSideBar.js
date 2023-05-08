@@ -6,7 +6,7 @@ import FollowBtn from "../FollowBtn"
 import LoadIcon from "../../images/loading.gif"
 import { getSuggestions } from "../../redux/actions/suggestionsAction"
 
-const RightSideBar = () => {
+const LeftSideBar = () => {
     const { auth, suggestions } = useSelector(state => state)
     const dispatch = useDispatch()
 
@@ -39,4 +39,4 @@ const RightSideBar = () => {
     )
 }
 
-export default RightSideBar
+export default LeftSideBar

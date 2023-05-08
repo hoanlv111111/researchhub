@@ -24,12 +24,21 @@ export const login = (data) => async (dispatch) => {
         })
 
     } catch (err) {
-        dispatch({
-            type: GLOBALTYPES.ALERT,
-            payload: {
-                error: err.response.data.msg
-            }
-        })
+        if (err.response.status === 400) {
+            dispatch({
+                type: GLOBALTYPES.ALERT,
+                payload: {
+                    error: "Invalid email or password"
+                }
+            })
+        } else {
+            dispatch({
+                type: GLOBALTYPES.ALERT,
+                payload: {
+                    error: err.response.data.msg
+                }
+            })
+        }
     }
 }
 

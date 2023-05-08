@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { createComment } from "../../redux/actions/commentAction"
 import Icons from "../Icons"
 import { Link } from "react-router-dom"
+import Avatar from "../Avatar"
 
 const InputComment = ({ children, post, onReply, setOnReply }) => {
     const [content, setContent] = useState("")
@@ -34,24 +35,48 @@ const InputComment = ({ children, post, onReply, setOnReply }) => {
     }
 
     return (
-        <form className="card-footer comment_input" onSubmit={handleSubmit} >
-            <Link to={`/profile/${auth.user._id}`}></Link>
-            {children}
+        <div className=""
+            style={{
+                display: "flex",
+                alignItems: "center",
+                width: "100%",
+                justifyContent: "space-around",
+                padding: "0 15px",
+                flexDirection: "row",
+                paddingBottom: "8px",
+            }}>
+            <Avatar src={auth.user.avatar} size="medium-avatar" />
+            <form className=" comment_input" onSubmit={handleSubmit}>
+                <Link to={`/profile/${auth.user._id}`}></Link>
+                {children}
 
-            <input type="text" placeholder="Add your comments..."
-                value={content} onChange={e => setContent(e.target.value)}
-                style={{
-                    filter: theme ? "invert(1)" : "invert(0)",
-                    color: theme ? "white" : "#111",
-                    background: theme ? "rgba(0,0,0,.03)" : "",
-                }} />
+                <div style={{
+                    position: 'relative',
+                    display: 'flex',
+                    // justifyContent: 'space-between',
+                    width: '100%',
+                    alignItems: 'center',
+                }}>
+                    <input
+                        type="text"
+                        placeholder="Add your comments..."
+                        value={content}
+                        onChange={e => setContent(e.target.value)}
+                        style={{
+                            filter: theme ? "invert(1)" : "invert(0)",
+                            color: theme ? "white" : "black",
+                            background: theme ? "rgba(0,0,0,.03)" : "",
+                            border: theme ? "1px solid black" : "1px solid white",
+                        }}
+                    />
+                    <Icons setContent={setContent} content={content} theme={theme} />
+                </div>
 
-            <Icons setContent={setContent} content={content} theme={theme} />
-
+            </form>
             <button type="submit" className="postBtn">
-                <i class="far fa-paper-plane" aria-hidden="true"></i>
+                <i className="far fa-paper-plane" aria-hidden="true"></i>
             </button>
-        </form>
+        </div>
     )
 }
 

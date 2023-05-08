@@ -33,7 +33,7 @@
 }
 
 .info_content_title button {
-    flex: 2;
+    flex: 1;
 }
 
 .info_container .follow_btn span {
@@ -53,8 +53,7 @@
 .info_content_title h2 {
     font-size: 2rem;
     font-weight: 400;
-    transform: translateY(4px);
-    flex: 3;
+    flex: 4 1;
 }
 
 /* -------------- Profile Edit ------------ */
@@ -191,6 +190,6 @@
 }
 
 .profile_tab button.active {
-    border-bottom: 3px solid blue;
+    border-bottom: 3px solid black;
     opacity: 0.8;
 }

@@ -102,7 +102,6 @@ const LeftSide = () => {
                                     </div>
                                 ))
                             }
-
                         </>
                         : <>
                             {
@@ -116,9 +115,7 @@ const LeftSide = () => {
                                                     : auth.user.following.find(item =>
                                                         item._id === user._id
                                                     ) && <i className="fas fa-circle" />
-
                                             }
-
                                         </UserCard>
                                     </div>
                                 ))

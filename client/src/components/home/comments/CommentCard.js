@@ -71,9 +71,10 @@ const CommentCard = ({ children, comment, post, commentId }) => {
             {/* div 5 */}
             <div className="comment_card-content">
                 <div className="avt_cmt">
-                    <Link to={`/profile/${comment.user._id}`} className="avt_cmt-o text-dark">
-                        <Avatar src={comment.user.avatar} size="medium-avatar" />
+                    <Link to={comment.user && `/profile/${comment.user._id}`} className="avt_cmt-o text-dark">
+                        <Avatar src={comment.user && comment.user.avatar} size="medium-avatar" />
                     </Link>
+
                 </div>
                 {/* div 4 */}
                 <div className="comment_content3">
@@ -89,11 +90,7 @@ const CommentCard = ({ children, comment, post, commentId }) => {
                                 }}
                             >
                                 {/* link add to username */}
-                                <Link to={`/profile/${comment.user._id}`} className="" style={{
-                                    filter: theme ? "invert(1)" : "invert(0)",
-                                    background: theme ? "#040404" : "",
-                                    color: theme ? "white" : ""
-                                }}>
+                                <Link to={`/profile/${comment.user._id}`}>
                                     <h6>{comment.user.username}</h6>
                                 </Link>
                                 {/* tag user in cmt */}
@@ -162,7 +159,7 @@ const CommentCard = ({ children, comment, post, commentId }) => {
             {
                 onReply &&
                 <InputComment post={post} onReply={onReply} setOnReply={setOnReply} >
-                    <Link to={`/profile/${onReply.user._id}`} className="mr-1">
+                    <Link to={`/profile/${comment.user?._id}`} className="mr-1">
                         @{onReply.user.username}:
                     </Link>
                 </InputComment>

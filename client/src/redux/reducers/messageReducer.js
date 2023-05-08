@@ -67,6 +67,11 @@ const messageReducer = (state = initialState, action) => {
                         : item
                 )
             };
+        // case MESS_TYPES.DELETE_MESSAGES:
+        //     return {
+        //         ...state,
+        //         data: state.data.filter(item => item._id !== action.payload._id)
+        //     };
         case MESS_TYPES.DELETE_CONVERSATION:
             return {
                 ...state,
