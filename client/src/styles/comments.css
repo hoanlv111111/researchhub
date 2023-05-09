@@ -23,12 +23,11 @@
     color: black;
 }
 
-.comment_input .postBtn {
+.comment_input_all .postBtn {
     font-size: 20px;
     border-radius: 20px;
-    border: none;
-    outline: none;
-    color: white;
+    background-color: white;
+    border: 1px solid white;
     font-weight: 600;
 }
 

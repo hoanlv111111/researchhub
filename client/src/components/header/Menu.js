@@ -23,7 +23,7 @@ const Menu = () => {
 
     return (
         <div className="menu">
-            <ul className="navbar-nav flex-row">
+            <ul class="navbar-nav flex-row align-items-center justify-content-between">
                 {
                     navLinks.map((link, index) => (
                         <li className={`nav-item px-3 ${isActive(link.path)}`} key={index}>
@@ -55,7 +55,7 @@ const Menu = () => {
                 </li>
 
 
-                <li className="nav-item dropdown d-flex align-items-center" style={{ opacity: 1 }}>
+                <li className="nav-item dropdown d-flex align-items-center justify-content-center" style={{ opacity: 1 }}>
                     <span className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <Avatar src={auth.user.avatar} size="medium-avatar" />
                     </span>
@@ -65,7 +65,7 @@ const Menu = () => {
                             <span className="material-icons" style={{ fontSize: "15px" }}>manage_accounts</span> Profile
                         </Link>
 
-                        <label htmlFor="theme" className="dropdown-item"
+                        <label htmlFor="theme" className="dropdown-item align-items-center justify-content-start"
                             onClick={() => dispatch({
                                 type: GLOBALTYPES.THEME, payload: !theme
                             })}>

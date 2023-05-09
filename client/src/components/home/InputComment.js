@@ -35,7 +35,7 @@ const InputComment = ({ children, post, onReply, setOnReply }) => {
     }
 
     return (
-        <div className=""
+        <div className="comment_input_all"
             style={{
                 display: "flex",
                 alignItems: "center",
