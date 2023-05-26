@@ -5,6 +5,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-image: url('https://res.cloudinary.com/diauabgmc/image/upload/v1684946804/bg_bgbwz1.jpg');
 }
 
 .auth_page form {

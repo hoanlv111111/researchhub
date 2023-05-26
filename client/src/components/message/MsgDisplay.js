@@ -1,5 +1,4 @@
 import React from "react"
-import Avatar from "../Avatar"
 import { imageShow, videoShow } from "../../utils/mediaShow"
 import { useSelector, useDispatch } from "react-redux"
 import { deleteMessages } from "../../redux/actions/messageAction"
@@ -12,7 +11,7 @@ const MsgDisplay = ({ user, msg, theme, data }) => {
     const handleDeleteMessages = () => {
         if (!data) return;
 
-        if (window.confirm("Do you want to delete?")) {
+        if (window.confirm("Do you want to delete message?")) {
             dispatch(deleteMessages({ msg, data, auth }))
         }
     }
@@ -56,7 +55,7 @@ const MsgDisplay = ({ user, msg, theme, data }) => {
                         style={{ background: "white", borderRadius: "10px" }}>
                         <span className="material-icons font-weight-bold mr-1"
                             style={{
-                                fontSize: "2.5rem", color: msg.call.times === 0 ? "tomato" : "green",
+                                fontSize: "1.75rem", color: msg.call.times === 0 ? "tomato" : "green",
                                 filter: theme ? "invert(1)" : "invert(0)"
                             }}>
                             {

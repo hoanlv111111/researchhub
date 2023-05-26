@@ -36,19 +36,22 @@ const FollowBtn = ({ user }) => {
     }
 
     return (
-        <>
+        <div className="follow_btn" style={{
+            width: "96px",
+            height: "42px",
+        }}>
             {
                 followed
-                    ? <button className="btn btn-outline-danger"
+                    ? <button className="btn btn-outline-danger" style={{ width: "100%" }}
                         onClick={handleUnFollow}>
                         UnFollow
                     </button>
-                    : <button className="btn btn-outline-info"
+                    : <button className="btn btn-outline-info" style={{ width: "100%" }}
                         onClick={handleFollow}>
                         Follow
                     </button>
             }
-        </>
+        </div>
     )
 }
 

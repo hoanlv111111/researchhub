@@ -4,7 +4,7 @@ const userCtrl = {
     searchUser: async (req, res) => {
         try {
             const users = await Users.find({ username: { $regex: req.query.username } })
-                .limit(10).select("fullname username avatar")
+                .limit(10).select("fullname username avatar institution")
 
             res.json({ users })
         } catch (err) {
@@ -24,11 +24,11 @@ const userCtrl = {
     },
     updateUser: async (req, res) => {
         try {
-            const { avatar, fullname, mobile, address, story, website, gender } = req.body
+            const { avatar, fullname, mobile, institution, story, website, gender } = req.body
             if (!fullname) return res.status(400).json({ msg: "Please add your full name." })
 
             await Users.findOneAndUpdate({ _id: req.user._id }, {
-                avatar, fullname, mobile, address, story, website, gender
+                avatar, fullname, mobile, institution, story, website, gender
             })
 
             res.json({ msg: "Update Success!" })

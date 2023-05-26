@@ -24,8 +24,7 @@ const Profile = () => {
     }, [id, auth, dispatch, profile.ids])
 
     return (
-        <div className="profile">
-
+        <div className="profile mt-3">
             <Info auth={auth} profile={profile} dispatch={dispatch} id={id} />
 
             {
@@ -47,7 +46,6 @@ const Profile = () => {
                         }
                     </>
             }
-
         </div>
     )
 }

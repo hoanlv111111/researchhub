@@ -18,6 +18,21 @@ class APIfeatures {
 }
 
 const postCtrl = {
+    searchPosts: async (req, res) => {
+        const { keyword } = req.body;
+        try {
+            // Using the $text operator to perform a text search on the "content" field
+            const posts = await Posts.find({ $text: { $search: keyword } })
+                .populate("user", "username") // Populate the "user" field with the username
+                .populate("comments", "text") // Populate the "comments" field with the comment text
+                .exec();
+
+            res.json(posts);
+        } catch (error) {
+            console.error("Error searching for posts:", error);
+            res.status(500).json({ error: "An error occurred while searching for posts" });
+        }
+    },
     createPost: async (req, res) => {
         try {
             const { content, images } = req.body
@@ -56,7 +71,6 @@ const postCtrl = {
                         select: "-password"
                     }
                 })
-
             res.json({
                 msg: "Success!",
                 result: posts.length,

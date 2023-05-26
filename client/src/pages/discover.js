@@ -6,7 +6,7 @@ import LoadIcon from "../images/loading.gif"
 import PostThumb from "../components/PostThumb"
 import LoadMoreBtn from "../components/LoadMoreBtn"
 import { getDataAPI } from "../utils/fetchData"
-import PostCard from "../components/PostCard"
+// import PostCard from "../components/PostCard"
 // import Posts from "../components/home/Posts"
 
 const Discover = () => {
@@ -30,18 +30,18 @@ const Discover = () => {
 
     return (
         <div>
-            {/* {
+            {
                 discover.loading
                     ? <img src={LoadIcon} alt="loading" className="d-block mx-auto my-4" />
                     : <PostThumb posts={discover.posts} result={discover.result} />
-            } */}
+            }
 
-            {
+            {/* {
                 discover.loading
                     ? <img src={LoadIcon} alt="loading" className="d-block mx-auto" />
                     : <PostCard posts={discover.posts} result={discover.result} />
 
-            }
+            }*/}
 
             {
                 load && <img src={LoadIcon} alt="loading" className="d-block mx-auto" />

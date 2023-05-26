@@ -1,7 +1,10 @@
 const mongoose = require("mongoose")
 
 const postSchema = new mongoose.Schema({
-    content: String,
+    content: {
+        type: String,
+        required: true
+    },
     images: {
         type: Array,
         required: true
@@ -13,4 +16,5 @@ const postSchema = new mongoose.Schema({
     timestamps: true
 })
 
+postSchema.index({ content: 'text' });
 module.exports = mongoose.model("post", postSchema)

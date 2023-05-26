@@ -11,6 +11,19 @@ export const checkImage = (file) => {
     return err;
 }
 
+export const checkPDF = (file) => {
+    let err = ""
+    if (!file) return err = "File does not exits"
+
+    if (file.size > 1024 * 1024 * 10) //10mb
+        err = "The largest PDF size is 10mb."
+
+    if (file.type !== "application/pdf")
+        err = "PDF format is incorrect."
+
+    return err;
+}
+
 export const imageUpload = async (images) => {
     let imgArr = [];
     for (const item of images) {

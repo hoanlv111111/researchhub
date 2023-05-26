@@ -9,10 +9,10 @@ const Register = () => {
     const history = useHistory()
 
     const initialState = {
-        fullname: "", username: "", email: "", password: "", cf_password: "", gender: "male"
+        fullname: "", username: "", email: "", password: "", cf_password: "", institution: "", gender: "male"
     }
     const [userData, setUserData] = useState(initialState)
-    const { fullname, username, email, password, cf_password } = userData
+    const { fullname, username, email, password, cf_password, institution } = userData
 
     const [typePass, setTypePass] = useState(false)
     const [typeCfPass, setTypeCfPass] = useState(false)
@@ -35,7 +35,7 @@ const Register = () => {
     return (
         <div className="auth_page">
             <form onSubmit={handleSubmit}>
-                <h3 className="text-uppercase text-center mb-4">Research Hub</h3>
+                <h1 className="text-uppercase text-center mb-4">Research Hub</h1>
 
                 <div className="form-group">
                     <label htmlFor="fullname">Full Name</label>
@@ -69,7 +69,16 @@ const Register = () => {
                         {alert.email ? alert.email : ""}
                     </small>
                 </div>
+                <div className="form-group">
+                    <label htmlFor="institution">Institution</label>
+                    <input type="text" className="form-control" id="institution" name="institution"
+                        onChange={handleChangeInput} value={institution}
+                        style={{ background: `${alert.institution ? "#fd2d6a14" : ""}` }} />
 
+                    <small className="form-text text-danger">
+                        {alert.institution ? alert.institution : ""}
+                    </small>
+                </div>
                 <div className="form-group">
                     <label htmlFor="exampleInputPassword1">Password</label>
 
@@ -132,7 +141,7 @@ const Register = () => {
                 </button>
 
                 <p className="my-2">
-                    Already have an account? <Link to="/" style={{ color: "tomato" }}>Login Now</Link>
+                    Already have an account? <Link to="/login" style={{ color: "tomato" }}>Login Now</Link>
                 </p>
             </form>
         </div>

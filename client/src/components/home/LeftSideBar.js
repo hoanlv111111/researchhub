@@ -1,42 +1,57 @@
-import React from "react"
-import { useSelector, useDispatch } from "react-redux"
+import React from 'react';
+import {
+    CDBSidebar,
+    CDBSidebarContent,
+    CDBSidebarFooter,
+    CDBSidebarHeader,
+    CDBSidebarMenu,
+    CDBSidebarMenuItem,
+} from 'cdbreact';
+import { NavLink } from 'react-router-dom';
 
-import UserCard from "../UserCard"
-import FollowBtn from "../FollowBtn"
-import LoadIcon from "../../images/loading.gif"
-import { getSuggestions } from "../../redux/actions/suggestionsAction"
-
-const LeftSideBar = () => {
-    const { auth, suggestions } = useSelector(state => state)
-    const dispatch = useDispatch()
-
+const LeftSidebar = () => {
     return (
-        <div className="mt-3">
-            <UserCard user={auth.user} />
-            <div className="d-flex justify-content-between align-items-center my-2">
-                <h5 className="text-danger" style={{ paddingLeft: "5px", border: "1px solid black" }}>Suggestions for you</h5>
-                {
-                    !suggestions.loading &&
-                    <i className="fas fa-redo" style={{ cursor: "pointer" }}
-                        onClick={() => dispatch(getSuggestions(auth.token))} />
-                }
-            </div>
+        <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial', position: 'relative' }}>
+            <CDBSidebar textColor="#fff" backgroundColor="#333">
+                <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
+                    <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
+                        Sidebar
+                    </a>
+                </CDBSidebarHeader>
 
-            {
-                suggestions.loading
-                    ? <img src={LoadIcon} alt="loading" className="d-flex justify-content-between align-items-center my-2" />
-                    : <div className="suggestions">
-                        {
-                            suggestions.users.map(user => (
-                                <UserCard key={user._id} user={user} >
-                                    <FollowBtn user={user} />
-                                </UserCard>
-                            ))
-                        }
+                <CDBSidebarContent className="sidebar-content">
+                    <CDBSidebarMenu>
+                        <NavLink exact to="/" activeClassName="activeClicked">
+                            <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
+                        </NavLink>
+                        <NavLink exact to="/tables" activeClassName="activeClicked">
+                            <CDBSidebarMenuItem icon="table">Tables</CDBSidebarMenuItem>
+                        </NavLink>
+                        <NavLink exact to="/profile" activeClassName="activeClicked">
+                            <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
+                        </NavLink>
+                        <NavLink exact to="/analytics" activeClassName="activeClicked">
+                            <CDBSidebarMenuItem icon="chart-line">Analytics</CDBSidebarMenuItem>
+                        </NavLink>
+
+                        <NavLink exact to="/hero404" target="_blank" activeClassName="activeClicked">
+                            <CDBSidebarMenuItem icon="exclamation-circle">404 page</CDBSidebarMenuItem>
+                        </NavLink>
+                    </CDBSidebarMenu>
+                </CDBSidebarContent>
+
+                <CDBSidebarFooter style={{ textAlign: 'center' }}>
+                    <div
+                        style={{
+                            padding: '20px 5px',
+                        }}
+                    >
+                        &copy; {new Date().getFullYear()}{' '} Research Hub. All rights reserved.
                     </div>
-            }
+                </CDBSidebarFooter>
+            </CDBSidebar>
         </div>
-    )
-}
+    );
+};
 
-export default LeftSideBar
+export default LeftSidebar;

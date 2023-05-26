@@ -29,6 +29,23 @@ const Menu = () => {
                         <li className={`nav-item px-3 ${isActive(link.path)}`} key={index}>
                             <Link className="nav-link" to={link.path}>
                                 <span className="material-icons">{link.icon}</span>
+                                {link.path === "/message" && (
+                                    <div className="notimess">
+                                        {/* {message.data.length > 0 && (
+                                            <span className="unread-badge"
+                                                style={{
+                                                    position: "absolute",
+                                                    width: "14px",
+                                                    height: "14px",
+                                                    backgroundColor: "red",
+                                                    borderRadius: "50%",
+                                                    color: "white",
+                                                    fontSize: "12px",
+                                                    // transform: "translate(-50%, -50%)"
+                                                }}>{message.data.length}</span>
+                                        )} */}
+                                    </div>
+                                )}
                             </Link>
                         </li>
                     ))
@@ -60,7 +77,7 @@ const Menu = () => {
                         <Avatar src={auth.user.avatar} size="medium-avatar" />
                     </span>
 
-                    <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div className="dropdown-menu" aria-labelledby="navbarDropdown" style={{ transform: "translateX(0px)" }}>
                         <Link className="dropdown-item" to={`/profile/${auth.user._id}`}>
                             <span className="material-icons" style={{ fontSize: "15px" }}>manage_accounts</span> Profile
                         </Link>
@@ -70,7 +87,7 @@ const Menu = () => {
                                 type: GLOBALTYPES.THEME, payload: !theme
                             })}>
                             <span className="material-icons" style={{ fontSize: "15px" }}>{theme ? "light_mode" : "mode_night"}</span>
-                            {theme ? "Light mode" : "Dark mode"}
+                            {theme ? " Light mode" : " Dark mode"}
                         </label>
                         <div className="dropdown-divider"></div>
                         <Link className="dropdown-item" to="/" onClick={() => dispatch(logout())}>

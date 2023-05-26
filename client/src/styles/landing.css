@@ -1,0 +1,251 @@
+.landing {
+    width: 100%;
+    height: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: auto;
+}
+
+.landing .header_landing {
+    width: 100%;
+    min-height: 10px;
+    min-width: 320px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    box-shadow: 0 0 10px white;
+    background: #f8f9fa;
+    border: 1px solid rgb(0, 0, 0, .125);
+}
+
+.landing .header_landing .menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
+    margin: 0;
+    height: 50px;
+}
+
+.landing .header_landing .menu .logo h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-left: 10px;
+    color: rgb(2, 151, 151);
+}
+
+.landing .header_landing .menu .navbar-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+}
+
+.landing .header_landing .menu ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 5px;
+    margin: 0;
+}
+
+.landing .header_landing .menu ul li {
+    font-size: 1.rem;
+    color: #000;
+    text-decoration: none;
+    padding: 0 5px;
+}
+
+.landing .header_landing .menu ul li a {
+    margin: 8px;
+    padding: 5px 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: teal;
+    color: white;
+}
+
+.landing .header_landing .menu ul li a button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.landing .header_landing .menu ul li a:hover {
+    background-color: rgb(3, 189, 161);
+    color: teal;
+}
+
+.landing .main {
+    width: 100%;
+    height: calc(100vh - 100px);
+    padding-top: 30px;
+    display: grid;
+    background-color: white;
+}
+
+.landing .landing .main .features {
+    display: grid;
+}
+
+.landing .main .features .f {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.landing .main .features .f .feature_text {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 20px;
+}
+
+.landing .main .features .f .feature_text h2 {
+    font-size: 36px;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.landing .main .features .f .feature_text p {
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 600;
+    padding-bottom: 5px;
+}
+
+.landing .main .features .blog {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px 20px;
+    margin: 10px 20px;
+    border-radius: 10px;
+}
+
+.landing .main .features .blog .blog_lists {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 20px;
+}
+
+.landing .main .features .blog h2 {
+    font-size: 36px;
+    font-style: italic;
+    font-weight: 600;
+    padding-bottom: 5px;
+}
+
+.landing .main .features .blog p {
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 600;
+    padding-bottom: 5px;
+}
+
+.landing .main .features .blog .blog_lists .blog_post .blog_post_img {
+    width: 200px;
+    height: 200px;
+    padding: 0 20px;
+}
+
+.landing .main .features .feature {
+    padding: 5px 10px;
+    border: 1px solid white;
+    border-radius: 10px;
+    background-color: teal;
+    color: white;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.landing .main .features .feature .feature_text {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 20px;
+}
+
+.landing .main .features .feature .feature_text p {
+    font-size: 36px;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.landing .main .features .feature .feature_text a {
+    margin: 8px;
+    padding: 5px 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: teal;
+    color: white;
+}
+
+.landing .main .features .feature .feature_text a button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.landing .main .features .feature .feature_text a button:hover {
+    color: teal;
+}
+
+.landing .main .features .f .feature_img img {
+    width: 300px;
+    height: 300px;
+    padding: none;
+}
+
+
+.landing .main .features .feature1,
+.landing .main .features .feature3 {
+    background-color: teal;
+}
+
+.landing .main .features .feature0,
+.landing .main .features .feature2 {
+    background-color: white;
+    flex-direction: row-reverse;
+}
+
+.landing .main .features .feature3 {
+    padding: 20px 20px;
+    margin: auto;
+}
+
+.landing footer {
+    border-top: 1px solid #ccc;
+    padding: 30px 10px;
+    transform: translateY(900px);
+}

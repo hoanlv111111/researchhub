@@ -45,17 +45,29 @@ const UserCard = ({ children, user, border, handleClose, setShowFollowers, setSh
         <div className={`d-flex p-2 align-items-center justify-content-between w-100 ${border}`}>
             <div>
                 <Link to={`/profile/${user._id}`} onClick={handleCloseAll}
+                    style={{
+                        width: "100%",
+                        cursor: "pointer",
+                        borderRadius: "5px",
+                        marginBottom: "5px",
+                        color: theme ? "white" : "black",
+                        textDecoration: "none",
+                        ':hover': {
+                            textDecoration: 'none',
+                            backgroundColor: 'red',
+                        }
+                    }}
                     className="d-flex align-items-center">
                     <Avatar src={user.avatar} size="big-avatar" />
 
                     <div className="ml-1" style={{ transform: "translateY(-2px)", color: 'black', textDecoration: "none" }}>
-                        <span className="d-block">{user.username}</span>
+                        <span className="d-block">{user.fullname}</span>
 
                         <small>
                             {
                                 msg
                                     ? showMsg(user)
-                                    : user.fullname
+                                    : user.institution
                             }
                         </small>
                     </div>

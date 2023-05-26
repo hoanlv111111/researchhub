@@ -26,7 +26,7 @@ const LeftSide = () => {
         if (!search) return setSearchUsers([]);
 
         try {
-            const res = await getDataAPI(`search?username=${search}`, auth.token)
+            const res = await getDataAPI(`searchUser?username=${search}`, auth.token)
             setSearchUsers(res.data.users)
         } catch (err) {
             dispatch({
@@ -81,7 +81,7 @@ const LeftSide = () => {
     }, [online, message.firstLoad, dispatch])
 
     return (
-        <>
+        <div className="left_side">
             <form className="message_header" onSubmit={handleSearch} >
                 <input type="text" value={search}
                     placeholder="Search chat..."
@@ -109,6 +109,9 @@ const LeftSide = () => {
                                     <div key={user._id} className={`message_user ${isActive(user)}`}
                                         onClick={() => handleAddUser(user)}>
                                         <UserCard user={user} msg={true}>
+                                            {user.unread > 0 && (
+                                                <span className="unread-badge">{user.unread}</span>
+                                            )}
                                             {
                                                 user.online
                                                     ? <i className="fas fa-circle text-success" />
@@ -125,7 +128,7 @@ const LeftSide = () => {
 
                 <button ref={pageEnd} style={{ opacity: 0 }} >Load More</button>
             </div>
-        </>
+        </div>
     )
 }
 

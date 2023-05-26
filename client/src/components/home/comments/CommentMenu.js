@@ -33,7 +33,7 @@ const CommentMenu = ({ post, comment, setOnEdit }) => {
                 (post.user._id === auth.user._id || comment.user._id === auth.user._id) &&
                 <div className="nav-item dropdown">
                     <span className="material-icons" id="moreLink" data-toggle="dropdown">
-                        more_vert
+                        more_horiz
                     </span>
 
                     <div className="dropdown-menu" aria-labelledby="moreLink">

@@ -9,7 +9,7 @@ const Conversation = () => {
                 <LeftSide />
             </div>
 
-            <div className="col-md-8 px-0">
+            <div className="col-md-8 px-0 right_mess">
                 <RightSide />
             </div>
         </div>

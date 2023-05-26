@@ -1,33 +1,48 @@
-import React from "react"
-import { useParams } from "react-router-dom"
-import NotFound from "../components/NotFound"
-import { useSelector } from "react-redux"
+import React from "react";
+import { useParams } from "react-router-dom";
+import NotFound from "../components/NotFound";
+import { useSelector } from "react-redux";
 
 const generatePage = (pageName) => {
-    const component = () => require(`../pages/${pageName}`).default
+    if (pageName === "login" || pageName === "register") {
+        return require(`../pages/${pageName}`).default;
+    } else {
+        let component;
 
-    try {
-        return React.createElement(component())
-    } catch (err) {
-        return <NotFound />
+        try {
+            component = require(`../pages/${pageName}`).default;
+        } catch (err) {
+            return null;
+        }
+
+        return React.createElement(component);
     }
-}
+};
 
 const PageRender = () => {
-    const { page, id } = useParams()
-    const { auth } = useSelector(state => state)
+    const { page, id } = useParams();
+    const { auth } = useSelector((state) => state);
 
     let pageName = "";
 
     if (auth.token) {
         if (id) {
-            pageName = `${page}/[id]`
+            pageName = `${page}/[id]`;
         } else {
-            pageName = `${page}`
+            pageName = `${page}`;
         }
+    } else {
+        pageName = "login";
     }
 
-    return generatePage(pageName)
-}
+    const Component = generatePage(pageName);
 
-export default PageRender
+    if (pageName === "login" || pageName === "register" || Component) {
+        return Component;
+    } else {
+        return <NotFound />;
+    }
+
+};
+
+export default PageRender;

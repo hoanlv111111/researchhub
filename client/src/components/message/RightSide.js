@@ -185,14 +185,14 @@ const RightSide = () => {
                 {
                     user.length !== 0 &&
                     <UserCard user={user}>
-                        <div>
+                        <div className="message_header_menu" style={{ filter: theme ? "invert(1)" : "invert(0)" }}>
                             <i className="fas fa-phone-alt"
                                 onClick={handleAudioCall} />
 
                             <i className="fas fa-video mx-3"
                                 onClick={handleVideoCall} />
 
-                            <i className="fas fa-trash text-danger"
+                            <i className="fas fa-trash"
                                 onClick={handleDeleteConversation} />
                         </div>
                     </UserCard>
@@ -252,13 +252,14 @@ const RightSide = () => {
                 }
             </div>
 
-            <form className="chat_input" onSubmit={handleSubmit} >
+            <form className="chat_input" onSubmit={handleSubmit}>
                 <input type="text" placeholder="Enter you message..."
                     value={text} onChange={e => setText(e.target.value)}
                     style={{
                         filter: theme ? "invert(1)" : "invert(0)",
                         background: theme ? "#040404" : "",
-                        color: theme ? "white" : ""
+                        color: theme ? "white" : "",
+                        border: theme ? "1px solid black" : ""
                     }} />
 
                 <Icons setContent={setText} content={text} theme={theme} />

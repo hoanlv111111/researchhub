@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom"
 import PageRender from "./customRouter/PageRender"
 import PrivateRouter from "./customRouter/PrivateRouter"
 
+import Landing from "./pages/landing"
 import Home from "./pages/home"
 import Login from "./pages/login"
 import Register from "./pages/register"
@@ -80,7 +81,8 @@ function App() {
           {auth.token && <SocketClient />}
           {call && <CallModal />}
 
-          <Route exact path="/" component={auth.token ? Home : Login} />
+          <Route exact path="/" component={auth.token ? Home : Landing} />
+          <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
 
           <PrivateRouter exact path="/:page" component={PageRender} />

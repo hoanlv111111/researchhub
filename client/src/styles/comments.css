@@ -58,6 +58,14 @@
     padding: 5px;
 }
 
+.comment_card .comment_card-content .comment_content-user a {
+    margin-left: 0;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-size: 16px;
+}
+
 .comment_card .comment_content1 {
     background: #ddd;
     padding: 8px 12px;
@@ -88,6 +96,7 @@
 .comment_card .comment_content3 .comment_time {
     font-weight: 600;
     margin-left: 10px;
+    font-size: small;
 }
 
 .comment_card .comment_content3 .comment_content2 .comment_content1 h6 {
@@ -119,6 +128,15 @@
     color: tomato;
 }
 
+.comment_card .comment_content3 .comment_content2 .menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5px;
+    flex-direction: column;
+    margin-left: 5px;
+}
+
 .comment_card .comment_content3 .comment_content2 .nav-item {
     cursor: pointer;
     opacity: 0;
@@ -126,8 +144,14 @@
 
 .comment_card .comment_content3 .comment_content2:hover .nav-item {
     opacity: 1;
-    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 5px;
+    flex-direction: column;
+    margin-left: 5px;
     border-radius: 50%;
+    background-color: #ddd;
 }
 
 .comment_card .comment_content3 .comment_content2 .dropdown-menu {

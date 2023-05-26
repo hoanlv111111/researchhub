@@ -41,9 +41,8 @@ const InputComment = ({ children, post, onReply, setOnReply }) => {
                 alignItems: "center",
                 width: "100%",
                 justifyContent: "space-around",
-                padding: "0 15px",
+                padding: "8px 15px",
                 flexDirection: "row",
-                paddingBottom: "8px",
             }}>
             <Avatar src={auth.user.avatar} size="medium-avatar" />
             <form className=" comment_input" onSubmit={handleSubmit}>
