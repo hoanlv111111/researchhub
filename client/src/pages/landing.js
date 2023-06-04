@@ -47,7 +47,7 @@ const Landing = () => {
                     </div>
                     <div className="f feature0">
                         <div className="feature_img">
-                            <img src="https://res.cloudinary.com/diauabgmc/image/upload/v1684147185/158517669-educational-diploma-research-color-icon-vector-educational-diploma-research-sign-isolated-symbol_l64xsb.jpg" alt="" />
+                            <img src="https://res.cloudinary.com/diauabgmc/image/upload/v1685577241/123_xhztso.png" alt="" />
                         </div>
                         <div className="feature_text">
                             <h2>Share your research work</h2>
@@ -56,7 +56,7 @@ const Landing = () => {
                     </div>
                     <div className="f feature1">
                         <div className="feature_img">
-                            <img src="https://res.cloudinary.com/diauabgmc/image/upload/v1684943345/icon-web-02_t7exvn.png" alt="" />
+                            <img src="https://res.cloudinary.com/diauabgmc/image/upload/v1685576573/Science_qvlvvx.png" alt="" />
                         </div>
                         <div className="feature_text">
                             <h2>Collaborate with other researchers</h2>

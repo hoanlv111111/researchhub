@@ -13,9 +13,8 @@ const RightSideBar = () => {
     return (
         <div className="mt-3"
             style={{
-                position: "sticky",
+                position: "fixed",
                 borderRadius: "10px",
-                border: "1px solid #ccc",
             }}>
             <UserCard user={auth.user} />
             <div className="d-flex justify-content-between align-items-center my-2">
@@ -43,7 +42,7 @@ const RightSideBar = () => {
 
             <div style={{ opacity: 0.5, textAlign: "center" }} className="my-2" >
                 <small>
-                    &copy; 2023 Research Hub. All rights reserved.
+                    &copy; {new Date().getFullYear()}{' '} Research Hub. All rights reserved.
                 </small>
             </div>
 

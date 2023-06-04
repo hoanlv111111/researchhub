@@ -14,13 +14,11 @@ const MsgDisplay = ({ user, msg, theme, data }) => {
         if (window.confirm("Do you want to delete message?")) {
             dispatch(deleteMessages({ msg, data, auth }))
         }
-    }
+    };
+
 
     return (
         <>
-            <div className="chat_time">
-                {new Date(msg.createdAt).toLocaleString()}
-            </div>
             <div className="you_content">
                 {
                     user._id === auth.user._id &&

@@ -8,6 +8,8 @@ import { useSelector, useDispatch } from "react-redux"
 import LoadIcon from "../../images/loading.gif"
 import { getProfileUsers } from "../../redux/actions/profileAction"
 import { useParams } from "react-router-dom"
+import LeftSidebar from "../../components/home/LeftSideBar"
+// import RightSideBar from "../../components/home/RightSideBar"
 
 
 const Profile = () => {
@@ -24,28 +26,36 @@ const Profile = () => {
     }, [id, auth, dispatch, profile.ids])
 
     return (
-        <div className="profile mt-3">
-            <Info auth={auth} profile={profile} dispatch={dispatch} id={id} />
+        <div className="profile_container row mx-0">
+            <div className="col-md-3">
+                <LeftSidebar />
+            </div>
+            <div className="profile col-md-9">
+                <Info auth={auth} profile={profile} dispatch={dispatch} id={id} />
 
-            {
-                auth.user._id === id &&
-                <div className="profile_tab">
-                    <button className={saveTab ? "" : "active"} onClick={() => setSaveTab(false)}>Posts</button>
-                    <button className={saveTab ? "active" : ""} onClick={() => setSaveTab(true)}>Saved</button>
-                </div>
-            }
+                {
+                    auth.user._id === id &&
+                    <div className="profile_tab">
+                        <button className={saveTab ? "" : "active"} onClick={() => setSaveTab(false)}>Posts</button>
+                        <button className={saveTab ? "active" : ""} onClick={() => setSaveTab(true)}>Saved</button>
+                    </div>
+                }
 
-            {
-                profile.loading
-                    ? <img className="d-block mx-auto" src={LoadIcon} alt="loading" />
-                    : <>
-                        {
-                            saveTab
-                                ? <Saved auth={auth} dispatch={dispatch} />
-                                : <Posts auth={auth} profile={profile} dispatch={dispatch} id={id} />
-                        }
-                    </>
-            }
+                {
+                    profile.loading
+                        ? <img className="d-block mx-auto" src={LoadIcon} alt="loading" />
+                        : <>
+                            {
+                                saveTab
+                                    ? <Saved auth={auth} dispatch={dispatch} />
+                                    : <Posts auth={auth} profile={profile} dispatch={dispatch} id={id} />
+                            }
+                        </>
+                }
+            </div>
+            {/* <div className="col-md-3">
+                <RightSideBar />
+            </div> */}
         </div>
     )
 }

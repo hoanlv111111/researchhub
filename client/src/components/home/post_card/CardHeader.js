@@ -6,6 +6,7 @@ import moment from "moment"
 import { GLOBALTYPES } from "../../../redux/actions/globalTypes"
 import { deletePost } from "../../../redux/actions/postAction"
 import { BASE_URL } from "../../../utils/config"
+import saveAs from "file-saver"
 
 const CardHeader = ({ post }) => {
     const { auth, socket } = useSelector(state => state)
@@ -26,6 +27,14 @@ const CardHeader = ({ post }) => {
 
     const handleCopyLink = () => {
         navigator.clipboard.writeText(`${BASE_URL}/post/${post._id}`)
+    }
+
+    const handleDownload = () => {
+        if (post.images.length > 0) {
+            post.images.forEach(img => {
+                return saveAs(img.url, img.url.replace(`${BASE_URL}/api`, ""))
+            })
+        }
     }
 
     return (
@@ -65,6 +74,9 @@ const CardHeader = ({ post }) => {
 
                     <div className="dropdown-item" onClick={handleCopyLink}>
                         <span className="material-icons">content_copy</span> Copy Link
+                    </div>
+                    <div className="dropdown-item" onClick={handleDownload}>
+                        <span className="material-icons">file_download</span> Download
                     </div>
                 </div>
             </div>

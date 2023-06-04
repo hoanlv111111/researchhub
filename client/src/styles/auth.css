@@ -16,6 +16,12 @@
     padding: 50px 25px;
 }
 
+.auth_page form .gender {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
 .auth_page form .pass {
     position: relative;
 }

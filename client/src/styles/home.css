@@ -4,7 +4,7 @@
     box-shadow: 0 0 5px white;
     padding: 15px 25px;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid #eee;
 }
 
 .status .statusBtn {
@@ -18,10 +18,19 @@
 }
 
 .status .statusBtn:hover {
-    background: #ddd;
+    background: #eee;
 }
 
 /* ------------Posts ------ */
+.posts {
+    background: white;
+    box-shadow: 0 0 5px white;
+    padding: 15px 25px;
+    border-radius: 5px;
+    border: 1px solid #eee;
+    margin-bottom: 10px;
+}
+
 .posts .card {
     box-shadow: 0 0 4px white;
 }
@@ -64,7 +73,7 @@
 
 .posts .card_header span:hover {
     cursor: pointer;
-    background-color: #ddd;
+    background-color: #eee;
     border-radius: 50%;
 }
 
@@ -116,8 +125,8 @@
     align-items: center;
     padding: 0 15px;
     margin: 0 10px 0 10px;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
     cursor: pointer;
 }
 
@@ -192,7 +201,7 @@
     max-height: calc(100vh - 50px);
     overflow: auto;
     margin-top: 3px;
-    border: 1px solid #ddd;
+    border: 1px solid #eee;
     border-radius: 3px;
     z-index: 1;
 

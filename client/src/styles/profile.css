@@ -1,6 +1,25 @@
-.profile {
+.profile_container {
     width: 100%;
     min-height: 100vh;
+}
+
+.profile_container .left_side {
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 300px;
+    min-height: calc(100vh - 50px);
+    position: fixed;
+}
+
+.profile {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px 10px;
 }
 
 /* ------ Info ---------- */
@@ -69,7 +88,7 @@
 }
 
 .edit_profile form {
-    max-width: 400px;
+    max-width: 500px;
     width: 100%;
     background: white;
     padding: 20px;

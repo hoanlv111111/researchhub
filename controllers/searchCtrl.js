@@ -7,10 +7,6 @@ const searchCtrl = async (req, res) => {
         const searchTerm = req.query.q;
         const type = req.query.type;
 
-        // if (typeof searchTerm !== 'string') {
-        //     searchTerm = searchTerm.toString();
-        // }
-
         let results = [];
         if (!searchTerm) {
             return res.status(400).json({ message: 'Search term is required' });

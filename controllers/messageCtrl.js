@@ -51,20 +51,24 @@ const messageCtrl = {
         try {
             const features = new APIfeatures(Conversations.find({
                 recipients: req.user._id
-            }), req.query).paginating()
+            }), req.query).paginating();
 
-            const conversations = await features.query.sort("-updatedAt")
-                .populate("recipients", "avatar username fullname")
+            const conversations = await features.query
+                .sort("-updatedAt")
+                .populate({
+                    path: "recipients",
+                    select: "avatar username fullname", // Select the fields you want to retrieve for the recipients
+                });
 
             res.json({
                 conversations,
-                result: conversations.length
-            })
-
+                result: conversations.length,
+            });
         } catch (err) {
-            return res.status(500).json({ msg: err.message })
+            return res.status(500).json({ msg: err.message });
         }
     },
+
     getMessages: async (req, res) => {
         try {
             const features = new APIfeatures(Messages.find({

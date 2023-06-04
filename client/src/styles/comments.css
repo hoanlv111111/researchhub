@@ -8,7 +8,7 @@
     width: 100%;
     color: black;
     background-color: white;
-    border: #ddd 1px solid;
+    border: #eee 1px solid;
     border-radius: 20px;
 }
 
@@ -67,7 +67,7 @@
 }
 
 .comment_card .comment_content1 {
-    background: #ddd;
+    background: #eee;
     padding: 8px 12px;
     margin-left: 10px;
     border-radius: 10px;
@@ -151,7 +151,7 @@
     flex-direction: column;
     margin-left: 5px;
     border-radius: 50%;
-    background-color: #ddd;
+    background-color: #eee;
 }
 
 .comment_card .comment_content3 .comment_content2 .dropdown-menu {

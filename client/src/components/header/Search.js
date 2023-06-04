@@ -10,8 +10,8 @@ const searchTypeOptions = [
 const Search = () => {
     const [search, setSearch] = useState("")
     const [users, setUsers] = useState([])
-    const [posts, setPosts] = useState([])
-    const [searchType, setSearchType] = useState(searchTypeOptions[0]);
+    const [setPosts] = useState([])
+    const [searchType] = useState(searchTypeOptions[0]);
 
     const { auth } = useSelector(state => state)
     const dispatch = useDispatch()
