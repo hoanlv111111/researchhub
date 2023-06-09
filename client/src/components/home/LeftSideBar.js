@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from "react-redux"
 import {
     CDBSidebar,
-    CDBSidebarHeader,
     CDBSidebarContent,
     CDBSidebarMenu,
     CDBSidebarMenuItem,
@@ -12,20 +11,15 @@ import { NavLink } from 'react-router-dom';
 const LeftSidebar = () => {
     const { auth } = useSelector(state => state)
     return (
-        <div className='left_side col-md-3' style={{ display: 'flex', height: '100vh', overflow: 'scroll initial', position: 'fixed' }}>
+        <div className='left_side_bar col-md-3'>
             <CDBSidebar textColor="#333" backgroundColor="#fff">
-                <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-                    <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
-                        ResearchHUB
-                    </a>
-                </CDBSidebarHeader>
                 <CDBSidebarContent className="sidebar-content">
                     <CDBSidebarMenu textColor="#333">
                         <NavLink exact to="/" activeClassName="activeClicked">
                             <CDBSidebarMenuItem icon="columns">Newfeeds</CDBSidebarMenuItem>
                         </NavLink>
-                        <NavLink exact to="/tables" activeClassName="activeClicked">
-                            <CDBSidebarMenuItem icon="table">Tables</CDBSidebarMenuItem>
+                        <NavLink exact to="/message" activeClassName="activeClicked">
+                            <CDBSidebarMenuItem icon="comment">Chat</CDBSidebarMenuItem>
                         </NavLink>
                         <NavLink exact to={`/profile/${auth.user._id}`} activeClassName="activeClicked">
                             <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>

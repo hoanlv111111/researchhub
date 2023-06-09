@@ -4,46 +4,21 @@ import { GLOBALTYPES } from "../redux/actions/globalTypes"
 import { createPost, updatePost } from "../redux/actions/postAction"
 import Icons from "./Icons"
 import { imageShow, videoShow, PdfShow } from "../utils/mediaShow"
+import BasicDatePicker from "./DatePicker"
 
 const StatusModal = () => {
     const { auth, theme, status, socket } = useSelector(state => state)
     const dispatch = useDispatch()
-
+    const currentDate = new Date().toISOString().slice(0, 10)
     const [content, setContent] = useState("")
     const [images, setImages] = useState([])
+    const [typePost, setTypePost] = useState("Article")
+    const [dateOfPublication, setDateOfPublication] = useState(currentDate)
 
     const [stream, setStream] = useState(false)
     const videoRef = useRef()
     const refCanvas = useRef()
     const [tracks, setTracks] = useState("")
-
-    const currentDate = new Date();
-    const currentDay = String(currentDate.getUTCDate()).padStart(2, '0');
-    const currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0');
-    const currentYear = currentDate.getUTCFullYear();
-
-    const [day, setDay] = useState(currentDay);
-    const [month, setMonth] = useState(currentMonth);
-    const [year, setYear] = useState(currentYear);
-
-    const handleSelectChange = (e, setter, min, max) => {
-        const value = e.target.value;
-        if (value >= min && value <= max) {
-            setter(value);
-        }
-    };
-
-    const renderOptions = (min, max) => {
-        const options = [];
-        for (let i = min; i <= max; i++) {
-            options.push(
-                <option key={i} value={i}>
-                    {i}
-                </option>
-            );
-        }
-        return options;
-    };
 
     const handleChangeImages = e => {
         const files = [...e.target.files]
@@ -110,14 +85,16 @@ const StatusModal = () => {
         // })
 
         if (status.onEdit) {
-            dispatch(updatePost({ content, images, auth, status }))
+            dispatch(updatePost({ content, images, typePost, dateOfPublication, auth, status }))
         } else {
-            dispatch(createPost({ content, images, auth, socket }))
+            dispatch(createPost({ content, images, typePost, dateOfPublication, auth, socket }))
         }
 
 
-        setContent("")
-        setImages([])
+        setContent("");
+        setImages([]);
+        setTypePost("");
+        setDateOfPublication({ day: "", month: "", year: "" });
         if (tracks) tracks.stop()
         dispatch({ type: GLOBALTYPES.STATUS, payload: false })
     }
@@ -126,6 +103,8 @@ const StatusModal = () => {
         if (status.onEdit) {
             setContent(status.content)
             setImages(status.images)
+            setTypePost(status.typePost)
+            setDateOfPublication(status.dateOfPublication)
         }
     }, [status])
 
@@ -159,57 +138,22 @@ const StatusModal = () => {
                                 <div className="flex-fill"></div>
                                 <Icons setContent={setContent} content={content} theme={theme} />
                             </div>
-                            {/* type */}
+
                             <div className="create_post_item">
                                 <span>Publication type</span>
-                                <select name="type" id="type">
-                                    <option value="article">Article</option>
+                                <select name="type" id="type" onChange={e => setTypePost(e.target.value)}>
+                                    <option value="Article">Article</option>
                                     <option value="thesis">Thesis</option>
-                                    <option value="book">Book</option>
-                                    <option value="patent">Patent</option>
-                                    <option value="other">Other</option>
+                                    <option value="Book">Book</option>
+                                    <option value="Patent">Patent</option>
+                                    <option value="Other">Other</option>
+                                    <option value="Conference">Conference</option>
+                                    <option value="Journal">Journal</option>
+                                    <option value="Report">Report</option>
+                                    <option value="Preprint">Preprint</option>
                                 </select>
-                            </div>
-                            {/* author */}
-                            <div className="create_post_item">
-                                <span>Author</span>
-                                <input type="text" name="author" id="author" />
-                                <div>
-                                    <button type="button">Add author</button>
-                                    <label><input type="checkbox" value="" />Option 1</label>
-                                    <label><input type="checkbox" value="" />Option 2</label>
-                                    <label><input type="checkbox" value="" />Option 3</label>
-                                </div>
-                            </div>
-                            {/* date */}
-                            <div className="create_post_item">
-                                <span>Publication date</span>
-                                <div>
-                                    <select
-                                        name="day"
-                                        id="day"
-                                        value={day}
-                                        onChange={(e) => handleSelectChange(e, setDay, 1, 31)}
-                                    >
-                                        {renderOptions(1, 31)}
-                                    </select>
-                                    <select
-                                        name="month"
-                                        id="month"
-                                        value={month}
-                                        onChange={(e) => handleSelectChange(e, setMonth, 1, 12)}
-                                    >
-                                        {renderOptions(1, 12)}
-                                    </select>
-                                    <select
-                                        name="year"
-                                        id="year"
-                                        value={year}
-                                        onChange={(e) => handleSelectChange(e, setYear, 1940, 2100)}
-                                    >
-                                        {renderOptions(1940, 2100)}
-                                    </select>
-                                </div>
+                                <span>Date of publication</span>
+                                <BasicDatePicker onChange={e => setDateOfPublication(e.target.value)} />
                             </div>
                         </form>
                     </div>
@@ -232,6 +176,20 @@ const StatusModal = () => {
                             </div>
                         ))}
                     </div>
+                    {/* <div className="show_pdf">
+                        {images.map((img, index) => (
+                            <div key={index} id="file_img">
+                                {img.url ? (
+                                    img.url.match(/pdf/i) ? PdfShow(img.url, theme) :
+                                        imageShow(img.url, theme)
+                                ) : (
+                                    img.type.match(/pdf/i) ? PdfShow(URL.createObjectURL(img), theme) :
+                                        imageShow(URL.createObjectURL(img), theme)
+                                )}
+                                <span onClick={() => deleteImages(index)}>&times;</span>
+                            </div>
+                        ))}
+                    </div> */}
 
                     {
                         stream &&

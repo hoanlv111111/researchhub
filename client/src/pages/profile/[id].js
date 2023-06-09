@@ -9,8 +9,6 @@ import LoadIcon from "../../images/loading.gif"
 import { getProfileUsers } from "../../redux/actions/profileAction"
 import { useParams } from "react-router-dom"
 import LeftSidebar from "../../components/home/LeftSideBar"
-// import RightSideBar from "../../components/home/RightSideBar"
-
 
 const Profile = () => {
     const { profile, auth } = useSelector(state => state)
@@ -53,9 +51,6 @@ const Profile = () => {
                         </>
                 }
             </div>
-            {/* <div className="col-md-3">
-                <RightSideBar />
-            </div> */}
         </div>
     )
 }

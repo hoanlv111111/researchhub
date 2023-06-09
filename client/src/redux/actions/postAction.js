@@ -13,13 +13,13 @@ export const POST_TYPES = {
 }
 
 
-export const createPost = ({ content, images, auth, socket }) => async (dispatch) => {
+export const createPost = ({ content, images, typePost, dateOfPublication, auth, socket }) => async (dispatch) => {
     let media = []
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
         if (images.length > 0) media = await imageUpload(images)
 
-        const res = await postDataAPI("posts", { content, images: media }, auth.token)
+        const res = await postDataAPI("posts", { content, images: media, typePost, dateOfPublication }, auth.token)
 
         dispatch({
             type: POST_TYPES.CREATE_POST,
@@ -31,7 +31,7 @@ export const createPost = ({ content, images, auth, socket }) => async (dispatch
         // Notify
         const msg = {
             id: res.data.newPost._id,
-            text: "added a new post.",
+            text: `added a new ${typePost}.`,
             recipients: res.data.newPost.user.followers,
             url: `/post/${res.data.newPost._id}`,
             content,
@@ -41,14 +41,14 @@ export const createPost = ({ content, images, auth, socket }) => async (dispatch
         dispatch(createNotify({ msg, auth, socket }))
 
     } catch (err) {
-        const error = err.response ? err.response.data.msg : "An error occurred while creating the post."
-        dispatch({
-            type: GLOBALTYPES.ALERT,
-            payload: { error }
-        })
+        console.log(err.response); // Log the error response to the console for debugging
+        // const error = "An error occurred while creating the post.";
+        // dispatch({
+        //     type: GLOBALTYPES.ALERT,
+        //     payload: { error }
+        // });
     }
 }
-
 
 export const getPosts = (token) => async (dispatch) => {
     try {
@@ -69,7 +69,7 @@ export const getPosts = (token) => async (dispatch) => {
     }
 }
 
-export const updatePost = ({ content, images, auth, status }) => async (dispatch) => {
+export const updatePost = ({ content, images, typePost, dateOfPublication, auth, status }) => async (dispatch) => {
     let media = []
     const imgNewUrl = images.filter(img => !img.url)
     const imgOldUrl = images.filter(img => img.url)
@@ -77,6 +77,8 @@ export const updatePost = ({ content, images, auth, status }) => async (dispatch
     if (status.content === content
         && imgNewUrl.length === 0
         && imgOldUrl.length === status.images.length
+        && typePost === status.typePost
+        && dateOfPublication === status.dateOfPublication
     ) return;
 
     try {
@@ -84,7 +86,7 @@ export const updatePost = ({ content, images, auth, status }) => async (dispatch
         if (imgNewUrl.length > 0) media = await imageUpload(imgNewUrl)
 
         const res = await patchDataAPI(`post/${status._id}`, {
-            content, images: [...imgOldUrl, ...media]
+            content, images: [...imgOldUrl, ...media], typePost, dateOfPublication
         }, auth.token)
 
         dispatch({ type: POST_TYPES.UPDATE_POST, payload: res.data.newPost })
@@ -141,7 +143,6 @@ export const likePost = ({ post, auth, socket }) => async (dispatch) => {
     }
 }
 
-
 export const unLikePost = ({ post, auth, socket }) => async (dispatch) => {
     const newPost = { ...post, likes: post.likes.filter(like => like._id !== auth.user._id) }
     dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost })
@@ -191,7 +192,7 @@ export const deletePost = ({ post, auth, socket }) => async (dispatch) => {
         // Notify
         const msg = {
             id: post._id,
-            text: "added a new post.",
+            text: `added a new ${post.typePost}.`,
             recipients: res.data.newPost.user.followers,
             url: `/post/${post._id}`,
         }

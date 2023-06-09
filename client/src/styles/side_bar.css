@@ -1,0 +1,16 @@
+.left_side_bar {
+    height: calc(100vh - 40px);
+    position: sticky;
+    top: 40px;
+    left: 0;
+    z-index: 1;
+}
+
+.right_side_bar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    right: 0;
+    left: calc(100vw - 300px);
+    z-index: 1;
+}

@@ -29,8 +29,8 @@ const NotifyModal = () => {
 
     return (
         <div style={{ minWidth: "300px" }}>
-            <div className="notify d-flex justify-content-between align-items-center px-3">
-                <h3>Notification</h3>
+            <div className="notify">
+                <h3>Notifications</h3>
                 {
                     notify.sound
                         ? <i className="fas fa-bell text-danger"
@@ -56,13 +56,12 @@ const NotifyModal = () => {
                             <Avatar src={msg.user.avatar} size="big-avatar" />
                             <div className="notify_content1">
                                 <div key={index} className="notify_content_text" >
-                                    {/* add link notify */}
                                     <Link to={`${msg.url}`} className="notify_content_text_link"
                                         onClick={() => handleIsRead(msg)}>
                                         <div className="notify_content_text_bw">
                                             <div>
                                                 <strong className="mr-1">{msg.user.username}</strong>
-                                                <span style={{ fontSize: "initial" }}>{msg.text}</span>
+                                                <span>{msg.text}</span>
                                             </div>
                                             {msg.content && <small>{msg.content.slice(0, 20)}...</small>}
                                         </div>

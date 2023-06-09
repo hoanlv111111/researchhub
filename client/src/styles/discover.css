@@ -1,0 +1,13 @@
+/* --------- Discover Container -------- */
+.discover_container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
+    margin: 0;
+    position: static;
+}
+
+.discover {
+    position: static;
+}

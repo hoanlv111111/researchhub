@@ -28,11 +28,9 @@ const Home = () => {
     }, [])
 
     return (
-        <div className="home row mx-0">
-            <div className="col-md-3">
-                <LeftSideBar />
-            </div>
-            <div className="col-md-6">
+        <div className="container_home">
+            <LeftSideBar />
+            <div className="home row mx-0 col-md-6">
                 <Status />
                 {
                     homePosts.loading
@@ -42,9 +40,7 @@ const Home = () => {
                             : <Posts />
                 }
             </div>
-            <div className="col-md-3">
-                <RightSideBar />
-            </div>
+            <RightSideBar />
         </div>
     )
 }

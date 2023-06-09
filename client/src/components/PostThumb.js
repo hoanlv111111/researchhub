@@ -15,19 +15,40 @@ const PostThumb = ({ posts, result }) => {
                     <Link key={post._id} to={`/post/${post._id}`}>
                         <div className="post_thumb_display">
                             {
-                                post.images && post.images.length > 0 && post.images[0].url
-                                    ? (
-                                        post.images[0].url.match(/video/i)
-                                            ? <video controls src={post.images[0].url} alt={post.images[0].url}
-                                                style={{ filter: theme ? "invert(1)" : "invert(0)" }} />
-                                            : <img src={post.images[0].url} alt={post.images[0].url}
-                                                style={{ filter: theme ? "invert(1)" : "invert(0)" }} />
+                                post.images && post.images.length > 0 && post.images[0].url ? (
+                                    post.images[0].url.match(/video/i) ? (
+                                        <video
+                                            controls
+                                            src={post.images[0].url}
+                                            alt={post.images[0].url}
+                                            style={{ filter: theme ? "invert(1)" : "invert(0)" }}
+                                        />
+                                    ) : post.images[0].url.match(/\.pdf$/i) ? (
+                                        <div>
+                                            <iframe
+                                                src={post.images[0].url}
+                                                width="100%"
+                                                height="500px"
+                                                title={`PDF File ${post._id}`}
+                                                style={{ filter: theme ? "invert(1)" : "invert(0)" }}
+                                            />
+                                        </div>
+                                    ) : (
+                                        <img
+                                            src={post.images[0].url}
+                                            alt={post.images[0].url}
+                                            style={{ filter: theme ? "invert(1)" : "invert(0)" }}
+                                        />
                                     )
-                                    // eslint-disable-next-line jsx-a11y/alt-text
-                                    : <img src="https://res.cloudinary.com/diauabgmc/image/upload/v1682387287/img-placeholder_ddtqow.jpg"
-                                        // alt="No image or video"
-                                        style={{ filter: theme ? "invert(1)" : "invert(0)" }} />
+                                ) : (
+                                    <img
+                                        src="https://res.cloudinary.com/diauabgmc/image/upload/v1686151999/img_148071_w5e4da-Thumbnail_i4zca8.png"
+                                        alt="No image or video"
+                                        style={{ filter: theme ? "invert(1)" : "invert(0)" }}
+                                    />
+                                )
                             }
+
 
                             <div className="post_thumb_menu">
                                 <i class="fas fa-heart">{post.likes.length}</i>

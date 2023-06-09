@@ -1,5 +1,5 @@
 import React from "react"
-import { imageShow, videoShow } from "../../utils/mediaShow"
+import { imageShow, videoShow, PdfShow } from "../../utils/mediaShow"
 import { useSelector, useDispatch } from "react-redux"
 import { deleteMessages } from "../../redux/actions/messageAction"
 import Times from "./Times"
@@ -41,6 +41,10 @@ const MsgDisplay = ({ user, msg, theme, data }) => {
                                     item.url.match(/video/i)
                                         ? videoShow(item.url, theme)
                                         : imageShow(item.url, theme)
+                                }
+                                {
+                                    item.url.match(/\.pdf$/i) &&
+                                    <PdfShow url={item.url} theme={theme} />
                                 }
                             </div>
                         ))

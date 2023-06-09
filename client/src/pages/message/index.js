@@ -8,7 +8,7 @@ const Message = () => {
                 <LeftSide />
             </div>
 
-            <div className="col-md-9 px-0 right_mess">
+            <div className="col-md-9 right_mess">
                 <div className="d-flex justify-content-center 
                 align-items-center flex-column h-100">
 
