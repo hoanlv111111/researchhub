@@ -50,10 +50,21 @@ const CardHeader = ({ post }) => {
                     </h6>
                     <small className="text-muted">
                         {moment(post.createdAt).fromNow()}
+                        {
+                            post.updatedAt !== post.createdAt &&
+                            <small className="text-muted">
+                                (Updated {moment(post.updatedAt).fromNow()})
+                            </small>
+                        }
                     </small>
+                    <div className="d-flex align-item-center">
+                        <small className="text-muted">{post.typePost}
+                            <span> | </span>
+                            <small className="text-muted">{post.dateOfPublication}</small>
+                        </small>
+                    </div>
                 </div>
             </div>
-
             <div className="nav-item dropdown">
                 <span className="material-icons" id="moreLink" data-toggle="dropdown">
                     more_horiz

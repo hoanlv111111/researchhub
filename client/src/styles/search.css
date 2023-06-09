@@ -1,8 +1,6 @@
 .search_page {
     position: absolute;
     left: 0;
-    width: 100%;
-    background: #fafafa;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,6 +24,43 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: row;
+    width: 50%;
+    border-bottom: 3px solid #d1d1d1;
+    position: relative;
+    height: auto;
+    background: white;
+}
+
+.search_page .search_form #search {
+    background: white;
+    border: none;
+    min-width: 250px;
+    width: 100%;
+    height: 30px;
+    outline: none;
+    text-indent: 5px;
+}
+
+.search_page .search_form:focus-within {
+    border-bottom: #164cee 3px solid;
+}
+
+.search_page .search_form input {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    outline: none;
+    text-indent: 5px;
+}
+
+.search_page .search_form input::placeholder {
+    color: black;
+    font-size: 14px;
+    text-indent: 5px;
 }
 
 .search_page .search_form .search_close:hover {
@@ -54,13 +89,12 @@
 }
 
 .search_page .search_results {
-    width: 100%;
+    width: 80%;
     height: calc(100vh - 100px);
     display: flex;
     align-items: center;
     flex-direction: column;
     padding: 10px 0;
-    background-color: white;
 }
 
 .search_page h1,
@@ -78,6 +112,9 @@
     align-items: center;
     justify-content: center;
     flex-direction: row;
+    width: 100%;
+    border-top: 1px solid rgb(239, 239, 239);
+    border-bottom: 1px solid rgb(239, 239, 239);
 }
 
 .search_page .search_results .search_tab button {
@@ -86,21 +123,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: auto;
     border: none;
     background-color: white;
+    outline: none;
+    border: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 5px 20px;
+    margin: 0 25px;
+    opacity: 0.5;
 }
 
 .search_page .search_results .search_tab button.active {
-    background: #f7a2a2;
-    border-bottom: 3px solid #000;
+    border-bottom: 3px solid black;
+    opacity: 0.5;
 }
 
-.search_page .search_results .post {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 10px 0;
+.search_page .search_results .abc a {
+    text-decoration: none;
 }

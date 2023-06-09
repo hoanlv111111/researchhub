@@ -87,6 +87,13 @@ const messageReducer = (state = initialState, action) => {
                         : { ...user, online: false }
                 )
             };
+        case MESS_TYPES.CHECK_READ_MESSAGE:
+            return {
+                ...state,
+                data: state.data.map((item) =>
+                    item._id === action.payload._id ? { ...item, messages: action.payload.message } : item
+                ),
+            };
         default:
             return state;
     }

@@ -10,8 +10,6 @@
 
 .landing .header_landing {
     width: 100%;
-    min-height: 10px;
-    min-width: 320px;
     position: sticky;
     top: 0;
     left: 0;

@@ -4,11 +4,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.13.4",
+    "@mui/x-date-pickers": "^6.6.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
     "axios": "^0.21.1",
     "cdbreact": "^1.5.14",
+    "dayjs": "^1.11.8",
     "file-saver": "^2.0.5",
     "mdbreact": "^5.2.0",
     "moment": "^2.29.1",
@@ -37,14 +42,14 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "engines":{
-    "node": "16.x"
-  }
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
     ]
+  },
+  "engines": {
+    "node": "16.x"
   },
   "browserslist": {
     "production": [

@@ -11,11 +11,7 @@ const RightSideBar = () => {
     const dispatch = useDispatch()
 
     return (
-        <div className="mt-3"
-            style={{
-                position: "fixed",
-                borderRadius: "10px",
-            }}>
+        <div className="mt-3 right_side_bar col-md-3">
             <UserCard user={auth.user} />
             <div className="d-flex justify-content-between align-items-center my-2">
                 <h5 className="text-danger" style={{ paddingLeft: "5px" }}>Suggestions for you</h5>

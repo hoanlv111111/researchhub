@@ -32,11 +32,6 @@ code {
   background-color: white;
 }
 
-.App .header {
-  width: 100%;
-  position: sticky;
-}
-
 .main {
   /* max-width: 1000px; */
   width: 100%;
@@ -55,6 +50,7 @@ img {
 /* -------- AUTH ---------- */
 @import url("./auth.css");
 
+/* -------- LANDING ---------- */
 @import url("./landing.css");
 
 /* -------- LOADING ---------- */
@@ -74,6 +70,9 @@ img {
 
 /* -------- Home ---------- */
 @import url("./home.css");
+
+/* -------- Side Bar ---------- */
+@import url("./side_bar.css");
 
 /* -------- Status Modal ---------- */
 @import url("./status_modal.css");
@@ -130,6 +129,10 @@ img {
     font-size: 1.5rem;
   }
 
+  .left_side_bar {
+    display: none;
+  }
+
   .message {
     height: calc(100vh - 100px);
     position: sticky;
@@ -175,6 +178,10 @@ img {
 
   .header .logo h1 {
     font-size: 1.5rem;
+  }
+
+  .left_side_bar {
+    display: none;
   }
 
   .message {

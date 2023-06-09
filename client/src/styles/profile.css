@@ -4,7 +4,6 @@
 }
 
 .profile_container .left_side {
-    background-color: red;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -127,7 +126,7 @@
     width: 100%;
     height: 50%;
     text-align: center;
-    color: orange;
+    color: #000;
     transition: 0.3s ease-in-out;
     background: #fff5;
 }

@@ -11,7 +11,7 @@ const postSchema = new mongoose.Schema({
     },
     typePost: {
         type: String,
-        default: "article"
+        default: "Article"
     },
     dateOfPublication: {
         type: Date,

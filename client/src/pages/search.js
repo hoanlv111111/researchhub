@@ -5,6 +5,7 @@ import { getDataAPI } from "../utils/fetchData";
 import { GLOBALTYPES } from "../redux/actions/globalTypes";
 import UserCard from "../components/UserCard";
 import LoadIcon from "../images/loading.gif";
+import RightSideBar from "../components/home/RightSideBar";
 
 const SearchPage = () => {
     const location = useLocation();
@@ -24,6 +25,7 @@ const SearchPage = () => {
         const query = queryParams.get("q");
 
         setSearch(query);
+        setTab(type === "post" ? 1 : 0); // Update tab based on type parameter
 
         const searchUsers = async () => {
             try {
@@ -64,84 +66,89 @@ const SearchPage = () => {
 
     const handleSearch = (e) => {
         e.preventDefault();
-        const formattedQuery = search.replace(/\s+/g, '%20');
-        const url = `/search?type=post&q=${formattedQuery}`;
-        window.location.href = url;
+        const formattedQuery = search.replace(/\s+/g, "%20");
+        const url = `/search?type=${tab === 1 ? "post" : "user"}&q=${formattedQuery}`; // Generate URL based on current tab
+        history.push(url);
     };
 
     return (
-        <div className="search_page">
-            <div className="search_header">
-                <h1>Search in ResearchHub</h1>
-                <form className="search_form" onSubmit={handleSearch}>
-                    <input
-                        type="text"
-                        name="query"
-                        value={search}
-                        id="search"
-                        onChange={(e) => setSearch(e.target.value.toLowerCase())}
-                    />
-                    <div className="search_icon" style={{ opacity: search }}>
-                        <button type="submit">
-                            <i className="fa fa-search" aria-hidden="true"></i>
+        <div className="row mx-0">
+            <div className="search_page col-md-9">
+                <div className="search_header">
+                    <h1>Search in ResearchHub</h1>
+                    <form className="search_form" onSubmit={handleSearch}>
+                        <i className="fa fa-search" aria-hidden="true"></i>
+                        <input
+                            placeholder="Search here..."
+                            type="text"
+                            name="query"
+                            value={search}
+                            id="search"
+                            onChange={(e) => setSearch(e.target.value.toLowerCase())}
+                        />
+                        <div className="search_icon" style={{ opacity: search }}>
+                            <button type="submit">
+                                <i className="fa fa-search" hidden="true" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div className="search_results">
+                    <div className="search_tab">
+                        <button
+                            className={tab === 0 ? "active" : ""}
+                            onClick={() => {
+                                setTab(0);
+                                history.push(`/search?type=user&q=${search}`);
+                            }}
+                        >
+                            Users
+                        </button>
+                        <button
+                            className={tab === 1 ? "active" : ""}
+                            onClick={() => {
+                                setTab(1);
+                                history.push(`/search?type=post&q=${search}`);
+                            }}
+                        >
+                            Posts
                         </button>
                     </div>
-                </form>
-            </div>
-            <div className="search_results">
-                <div className="search_tab">
-                    <button
-                        className={tab === 0 ? "active" : ""}
-                        onClick={() => {
-                            setTab(0);
-                            history.push(`/search?type=user&q=${search}`);
-                        }}
-                    >
-                        Users
-                    </button>
-                    <button
-                        className={tab === 1 ? "active" : ""}
-                        onClick={() => {
-                            setTab(1);
-                            history.push(`/search?type=post&q=${search}`);
-                        }}
-                    >
-                        Posts
-                    </button>
+                    {loading ? (
+                        <img className="loading" src={LoadIcon} alt="loading" />
+                    ) : (
+                        <>
+                            {tab === 0 && (
+                                <div className="users">
+                                    {users.length === 0 ? (
+                                        <h2>No User Found</h2>
+                                    ) : (
+                                        users.map((user) => <UserCard key={user._id} user={user} />)
+                                    )}
+                                </div>
+                            )}
+                            {tab === 1 && (
+                                <div className="posts abc">
+                                    {posts.length === 0 ? (
+                                        <h2>No Post Found</h2>
+                                    ) : (
+                                        posts.map((post) => (
+                                            <Link to={`/post/${post._id}`} key={post._id}>
+                                                <div key={post._id}>
+                                                    <h3>{post.content}</h3>
+                                                    Author: <UserCard user={post.user} />
+                                                </div>
+                                            </Link>
+                                        ))
+                                    )}
+                                </div>
+                            )}
+                        </>
+                    )}
                 </div>
-                {loading ? (
-                    <img className="loading" src={LoadIcon} alt="loading" />
-                ) : (
-                    <>
-                        {tab === 0 && (
-                            <div className="users">
-                                {users.length === 0 ? (
-                                    <h2>No User Found</h2>
-                                ) : (
-                                    users.map((user) => (
-                                        <UserCard key={user._id} user={user} />
-                                    ))
-                                )}
-                            </div>
-                        )}
-                        {tab === 1 && (
-                            <div className="posts">
-                                {posts.length === 0 ? (
-                                    <h2>No Post Found</h2>
-                                ) : (
-                                    posts.map((post) => (
-                                        <Link to={`/post/${post._id}`} key={post._id}>
-                                            <div key={post._id}>
-                                                <h3>{post.content}</h3>
-                                                <UserCard user={post.user} />
-                                            </div>
-                                        </Link>
-                                    ))
-                                )}
-                            </div>
-                        )}
-                    </>
-                )}
+            </div>
+            <div>
+                <RightSideBar />
             </div>
         </div>
     );

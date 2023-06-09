@@ -29,23 +29,6 @@ const Menu = () => {
                         <li className={`nav-item px-3 ${isActive(link.path)}`} key={index}>
                             <Link className="nav-link" to={link.path}>
                                 <span className="material-icons">{link.icon}</span>
-                                {link.path === "/message" && (
-                                    <div className="notimess">
-                                        {/* {message.data.length > 0 && (
-                                            <span className="unread-badge"
-                                                style={{
-                                                    position: "absolute",
-                                                    width: "14px",
-                                                    height: "14px",
-                                                    backgroundColor: "red",
-                                                    borderRadius: "50%",
-                                                    color: "white",
-                                                    fontSize: "12px",
-                                                    // transform: "translate(-50%, -50%)"
-                                                }}>{message.data.length}</span>
-                                        )} */}
-                                    </div>
-                                )}
                             </Link>
                         </li>
                     ))
@@ -65,7 +48,7 @@ const Menu = () => {
                     </span>
 
                     <div className="dropdown-menu" aria-labelledby="navbarDropdown"
-                        style={{ transform: "translateX(75px)" }}>
+                        style={{ transform: "translateX(5%)" }}>
                         <NotifyModal />
                     </div>
 

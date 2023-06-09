@@ -35,13 +35,13 @@ const postCtrl = {
     },
     createPost: async (req, res) => {
         try {
-            const { content, images } = req.body
+            const { content, images, typePost, dateOfPublication } = req.body
 
             // if(images.length === 0)
             // return res.status(400).json({msg: "Please add your photo."})
 
             const newPost = new Posts({
-                content, images, user: req.user._id
+                content, images, typePost, dateOfPublication, user: req.user._id
             })
             await newPost.save()
 
@@ -83,7 +83,7 @@ const postCtrl = {
     },
     updatePost: async (req, res) => {
         try {
-            const { content, images } = req.body
+            const { content, images, typePost, dateOfPublication } = req.body
 
             const post = await Posts.findOneAndUpdate({ _id: req.params.id }, {
                 content, images
@@ -100,7 +100,7 @@ const postCtrl = {
                 msg: "Updated Post!",
                 newPost: {
                     ...post._doc,
-                    content, images
+                    content, images, typePost, dateOfPublication
                 }
             })
         } catch (err) {

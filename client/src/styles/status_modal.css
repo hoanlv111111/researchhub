@@ -144,6 +144,7 @@
     justify-content: flex-start;
     flex-direction: column;
     padding: 5px;
+    overflow-y: hidden;
 }
 
 .status_body .create_post .create_post_item span {
