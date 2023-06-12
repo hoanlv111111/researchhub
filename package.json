@@ -1,6 +1,7 @@
 {
   "name": "researchhub",
   "version": "1.0.0",
+  "proxy": "https://researchhub.vercel.app/",
   "description": "",
   "main": "server.js",
   "scripts": {

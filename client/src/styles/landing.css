@@ -24,16 +24,14 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 20px;
-    margin: 0;
-    height: 50px;
+    margin: 10px;
 }
 
 .landing .header_landing .menu .logo h1 {
     font-size: 2rem;
     font-weight: 600;
     margin-left: 10px;
-    color: rgb(2, 151, 151);
+    color: teal;
 }
 
 .landing .header_landing .menu .navbar-nav {
@@ -86,7 +84,6 @@
 
 .landing .main {
     width: 1000px;
-    height: calc(100vh - 100px);
     padding-top: 30px;
     display: grid;
     background-color: white;
@@ -215,8 +212,14 @@
     cursor: pointer;
 }
 
+.landing .main .features .feature .feature_text a:hover {
+    color: teal;
+    background-color: white;
+}
+
 .landing .main .features .feature .feature_text a button:hover {
     color: teal;
+    background-color: white;
 }
 
 .landing .main .features .f .feature_img img {

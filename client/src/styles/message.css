@@ -298,7 +298,7 @@
     height: calc(100vh - 70px);
     display: flex;
     justify-content: space-between;
-    align-items: start;
+    align-items: flex-start;
     background: #f8f8f8;
     border-radius: 10px;
 }
