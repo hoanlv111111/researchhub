@@ -54,6 +54,9 @@ export const updateProfileUser = ({ userData, avatar, auth }) => async (dispatch
     if (userData.fullname.length > 25)
         return dispatch({ type: GLOBALTYPES.ALERT, payload: { error: "Your full name too long." } })
 
+    if (!userData.institution)
+        return dispatch({ type: GLOBALTYPES.ALERT, payload: { error: "Please add your institution." } })
+
     if (userData.story.length > 200)
         return dispatch({ type: GLOBALTYPES.ALERT, payload: { error: "Your story too long." } })
 
