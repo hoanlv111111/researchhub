@@ -27,6 +27,6 @@ router.get("/getSavePosts", auth, postCtrl.getSavePosts)
 
 router.get("/searchPost", auth, postCtrl.searchPosts)
 
-router.get("/hashtag/:hashtag", auth, postCtrl.hashtagPost)
+// router.get("/hashtag/:hashtag", auth, postCtrl.hashtagPost)
 
 module.exports = router

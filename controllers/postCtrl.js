@@ -262,23 +262,23 @@ const postCtrl = {
             return res.status(500).json({ msg: err.message })
         }
     },
-    getPostByHashtag: async (req, res) => {
-        try {
-            const features = new APIfeatures(Posts.find({
-                hashtag: { $in: [req.params.hashtag] }
-            }), req.query).paginating()
+    // getPostByHashtag: async (req, res) => {
+    //     try {
+    //         const features = new APIfeatures(Posts.find({
+    //             hashtag: { $in: [req.params.hashtag] }
+    //         }), req.query).paginating()
 
-            const posts = await features.query.sort("-createdAt")
+    //         const posts = await features.query.sort("-createdAt")
 
-            res.json({
-                msg: "Success!",
-                result: posts.length,
-                posts
-            })
-        } catch (err) {
-            return res.status(500).json({ msg: err.message })
-        }
-    }
+    //         res.json({
+    //             msg: "Success!",
+    //             result: posts.length,
+    //             posts
+    //         })
+    //     } catch (err) {
+    //         return res.status(500).json({ msg: err.message })
+    //     }
+    // }
 }
 
 module.exports = postCtrl
