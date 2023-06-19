@@ -35,15 +35,14 @@ const postCtrl = {
     },
     createPost: async (req, res) => {
         try {
-            const { content, images, typePost, dateOfPublication } = req.body
-
-            // if(images.length === 0)
-            // return res.status(400).json({msg: "Please add your photo."})
+            const { content, images, typePost, dateOfPublication, hashtags } = req.body
 
             const newPost = new Posts({
-                content, images, typePost, dateOfPublication, user: req.user._id
+                content, images, typePost, dateOfPublication, hashtags, user: req.user._id
             })
             await newPost.save()
+
+            console.log(newPost)
 
             res.json({
                 msg: "Created Post!",
@@ -83,7 +82,7 @@ const postCtrl = {
     },
     updatePost: async (req, res) => {
         try {
-            const { content, images, typePost, dateOfPublication } = req.body
+            const { content, images, typePost, dateOfPublication, hashtags } = req.body
 
             const post = await Posts.findOneAndUpdate({ _id: req.params.id }, {
                 content, images
@@ -100,7 +99,7 @@ const postCtrl = {
                 msg: "Updated Post!",
                 newPost: {
                     ...post._doc,
-                    content, images, typePost, dateOfPublication
+                    content, images, typePost, dateOfPublication, hashtags
                 }
             })
         } catch (err) {
@@ -263,6 +262,23 @@ const postCtrl = {
             return res.status(500).json({ msg: err.message })
         }
     },
+    getPostByHashtag: async (req, res) => {
+        try {
+            const features = new APIfeatures(Posts.find({
+                hashtag: { $in: [req.params.hashtag] }
+            }), req.query).paginating()
+
+            const posts = await features.query.sort("-createdAt")
+
+            res.json({
+                msg: "Success!",
+                result: posts.length,
+                posts
+            })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    }
 }
 
 module.exports = postCtrl

@@ -16,7 +16,6 @@
     justify-content: center;
     flex-direction: column;
     background-color: white;
-    border-bottom: 1px solid #000;
     padding-bottom: 20px;
 }
 
@@ -142,4 +141,21 @@
 
 .search_page .search_results .abc a {
     text-decoration: none;
+    border-bottom: 1px solid #000;
+    color: #000;
+    font-size: 20px;
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    transition: all 0.3s ease-in-out;
+}
+
+.search_page .search_results .abc {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }

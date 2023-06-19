@@ -97,6 +97,20 @@ const userCtrl = {
                 { $lookup: { from: "users", localField: "following", foreignField: "_id", as: "following" } },
             ]).project("-password");
 
+            if (users.length === 0) {
+                // Fetch users without considering institution or skills filters
+                users = await Users.aggregate([
+                    {
+                        $match: {
+                            _id: { $nin: newArr }
+                        }
+                    },
+                    { $sample: { size: Number(num) } },
+                    { $lookup: { from: "users", localField: "followers", foreignField: "_id", as: "followers" } },
+                    { $lookup: { from: "users", localField: "following", foreignField: "_id", as: "following" } },
+                ]).project("-password");
+            }
+
             return res.json({
                 users,
                 result: users.length

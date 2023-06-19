@@ -6,6 +6,7 @@ import { GLOBALTYPES } from "../redux/actions/globalTypes";
 import UserCard from "../components/UserCard";
 import LoadIcon from "../images/loading.gif";
 import RightSideBar from "../components/home/RightSideBar";
+import ReactMarkdown from "react-markdown";
 
 const SearchPage = () => {
     const location = useLocation();
@@ -135,8 +136,8 @@ const SearchPage = () => {
                                         posts.map((post) => (
                                             <Link to={`/post/${post._id}`} key={post._id}>
                                                 <div key={post._id}>
-                                                    <h3>{post.content}</h3>
-                                                    Author: <UserCard user={post.user} />
+                                                    <ReactMarkdown>{post.content}</ReactMarkdown>
+                                                    <p>Author: <UserCard user={post.user} /></p>
                                                 </div>
                                             </Link>
                                         ))

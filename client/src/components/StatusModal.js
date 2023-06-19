@@ -1,121 +1,144 @@
-import React, { useState, useRef, useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { GLOBALTYPES } from "../redux/actions/globalTypes"
-import { createPost, updatePost } from "../redux/actions/postAction"
-import Icons from "./Icons"
-import { imageShow, videoShow, PdfShow } from "../utils/mediaShow"
-import BasicDatePicker from "./DatePicker"
+import React, { useState, useRef, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { GLOBALTYPES } from "../redux/actions/globalTypes";
+import { createPost, updatePost } from "../redux/actions/postAction";
+import { imageShow, videoShow, PdfShow } from "../utils/mediaShow";
+import BasicDatePicker from "./DatePicker";
+import ReactMarkdown from "react-markdown";
+import Editor from "react-markdown-editor-lite";
+import "react-markdown-editor-lite/lib/index.css";
 
 const StatusModal = () => {
-    const { auth, theme, status, socket } = useSelector(state => state)
-    const dispatch = useDispatch()
-    const currentDate = new Date().toISOString().slice(0, 10)
-    const [content, setContent] = useState("")
-    const [images, setImages] = useState([])
-    const [typePost, setTypePost] = useState("Article")
-    const [dateOfPublication, setDateOfPublication] = useState(currentDate)
+    const { auth, theme, status, socket } = useSelector((state) => state);
+    const dispatch = useDispatch();
+    const currentDate = new Date().toISOString().slice(0, 10);
+    const [content, setContent] = useState("");
+    const [images, setImages] = useState([]);
+    const [typePost, setTypePost] = useState("Article");
+    const [dateOfPublication, setDateOfPublication] = useState(currentDate);
 
-    const [stream, setStream] = useState(false)
-    const videoRef = useRef()
-    const refCanvas = useRef()
-    const [tracks, setTracks] = useState("")
+    const [stream, setStream] = useState(false);
+    const videoRef = useRef();
+    const refCanvas = useRef();
+    const [tracks, setTracks] = useState("");
 
-    const handleChangeImages = e => {
-        const files = [...e.target.files]
-        let err = ""
-        let newImages = []
+    const handleChangeImages = (e) => {
+        const files = [...e.target.files];
+        let err = "";
+        let newImages = [];
 
-        files.forEach(file => {
-            if (!file) return err = "File does not exist."
+        files.forEach((file) => {
+            if (!file) return (err = "File does not exist.");
 
             if (file.size > 1024 * 1024 * 5) {
-                return err = "The image/video largest is 5mb."
+                return (err = "The image/video largest is 5mb.");
             }
 
-            return newImages.push(file)
-        })
+            return newImages.push(file);
+        });
 
-        if (err) dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err } })
-        setImages([...images, ...newImages])
-    }
+        if (err)
+            dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err } });
+        setImages([...images, ...newImages]);
+    };
 
     const deleteImages = (index) => {
-        const newArr = [...images]
-        newArr.splice(index, 1)
-        setImages(newArr)
-    }
+        const newArr = [...images];
+        newArr.splice(index, 1);
+        setImages(newArr);
+    };
 
     const handleStream = () => {
-        setStream(true)
+        setStream(true);
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(mediaStream => {
-                    videoRef.current.srcObject = mediaStream
-                    videoRef.current.play()
+            navigator.mediaDevices
+                .getUserMedia({ video: true })
+                .then((mediaStream) => {
+                    videoRef.current.srcObject = mediaStream;
+                    videoRef.current.play();
 
-                    const track = mediaStream.getTracks()
-                    setTracks(track[0])
-                }).catch(err => console.log(err))
+                    const track = mediaStream.getTracks();
+                    setTracks(track[0]);
+                })
+                .catch((err) => console.log(err));
         }
-    }
+    };
 
     const handleCapture = () => {
         const width = videoRef.current.clientWidth;
         const height = videoRef.current.clientHeight;
 
-        refCanvas.current.setAttribute("width", width)
-        refCanvas.current.setAttribute("height", height)
+        refCanvas.current.setAttribute("width", width);
+        refCanvas.current.setAttribute("height", height);
 
-        const ctx = refCanvas.current.getContext("2d")
-        ctx.drawImage(videoRef.current, 0, 0, width, height)
-        let URL = refCanvas.current.toDataURL()
-        setImages([...images, { camera: URL }])
-    }
+        const ctx = refCanvas.current.getContext("2d");
+        ctx.drawImage(videoRef.current, 0, 0, width, height);
+        let URL = refCanvas.current.toDataURL();
+        setImages([...images, { camera: URL }]);
+    };
 
     const handleStopStream = () => {
-        tracks.stop()
-        setStream(false)
-    }
+        tracks.stop();
+        setStream(false);
+    };
+
+    const handleDateChange = (date) => {
+        setDateOfPublication(date);
+    };
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-        // if(images.length === 0)
-        // return dispatch({ 
-        //     type: GLOBALTYPES.ALERT, payload: {error: "Please add your photo."}
-        // })
+        e.preventDefault();
 
         if (status.onEdit) {
-            dispatch(updatePost({ content, images, typePost, dateOfPublication, auth, status }))
+            dispatch(
+                updatePost({
+                    content,
+                    images,
+                    typePost,
+                    dateOfPublication,
+                    auth,
+                    status,
+                })
+            );
         } else {
-            dispatch(createPost({ content, images, typePost, dateOfPublication, auth, socket }))
+            dispatch(
+                createPost({
+                    content,
+                    images,
+                    typePost,
+                    dateOfPublication,
+                    auth,
+                    socket,
+                })
+            );
         }
-
 
         setContent("");
         setImages([]);
         setTypePost("");
-        setDateOfPublication({ day: "", month: "", year: "" });
-        if (tracks) tracks.stop()
-        dispatch({ type: GLOBALTYPES.STATUS, payload: false })
-    }
+        if (tracks) tracks.stop();
+        dispatch({ type: GLOBALTYPES.STATUS, payload: false });
+    };
 
     useEffect(() => {
         if (status.onEdit) {
-            setContent(status.content)
-            setImages(status.images)
-            setTypePost(status.typePost)
-            setDateOfPublication(status.dateOfPublication)
+            setContent(status.content);
+            setImages(status.images);
+            setTypePost(status.typePost);
+            setDateOfPublication(status.dateOfPublication);
         }
-    }, [status])
+    }, [status]);
 
     return (
         <div className="status_modal">
             <form onSubmit={handleSubmit}>
                 <div className="status_header">
                     <h5 className="m-0">New Post</h5>
-                    <span onClick={() => dispatch({
-                        type: GLOBALTYPES.STATUS, payload: false
-                    })}>
+                    <span
+                        onClick={() =>
+                            dispatch({ type: GLOBALTYPES.STATUS, payload: false })
+                        }
+                    >
                         &times;
                     </span>
                 </div>
@@ -126,22 +149,19 @@ const StatusModal = () => {
                             <div className="title">
                                 <h5>Abtract</h5>
                             </div>
-                            <textarea name="content" value={content}
-                                placeholder={`${auth.user.username}, what are you thinking?`}
-                                onChange={e => setContent(e.target.value)}
-                                style={{
-                                    filter: theme ? "invert(1)" : "invert(0)",
-                                    color: theme ? "white" : "#111",
-                                    background: theme ? "rgba(0,0,0,.03)" : "",
-                                }} />
-                            <div className="d-flex">
-                                <div className="flex-fill"></div>
-                                <Icons setContent={setContent} content={content} theme={theme} />
-                            </div>
+                            <Editor
+                                value={content}
+                                onChange={({ text }) => setContent(text)}
+                                renderHTML={(text) => <ReactMarkdown>{text}</ReactMarkdown>}
+                            />
 
                             <div className="create_post_item">
                                 <span>Publication type</span>
-                                <select name="type" id="type" onChange={e => setTypePost(e.target.value)}>
+                                <select
+                                    name="type"
+                                    id="type"
+                                    onChange={(e) => setTypePost(e.target.value)}
+                                >
                                     <option value="Article">Article</option>
                                     <option value="thesis">Thesis</option>
                                     <option value="Book">Book</option>
@@ -153,7 +173,7 @@ const StatusModal = () => {
                                     <option value="Preprint">Preprint</option>
                                 </select>
                                 <span>Date of publication</span>
-                                <BasicDatePicker onChange={e => setDateOfPublication(e.target.value)} />
+                                <BasicDatePicker onChange={handleDateChange} />
                             </div>
                         </form>
                     </div>
@@ -161,73 +181,73 @@ const StatusModal = () => {
                     <div className="show_images">
                         {images.map((img, index) => (
                             <div key={index} id="file_img">
-                                {img.camera ? imageShow(img.camera, theme) : (
-                                    img.url ? (
-                                        img.url.match(/video/i) ? videoShow(img.url, theme) :
-                                            img.url.match(/pdf/i) ? PdfShow(img.url, theme) :
-                                                imageShow(img.url, theme)
-                                    ) : (
-                                        img.type.match(/video/i) ? videoShow(URL.createObjectURL(img), theme) :
-                                            img.type.match(/pdf/i) ? PdfShow(URL.createObjectURL(img), theme) :
-                                                imageShow(URL.createObjectURL(img), theme)
-                                    )
-                                )}
+                                {img.camera
+                                    ? imageShow(img.camera, theme)
+                                    : img.url
+                                        ? img.url.match(/video/i)
+                                            ? videoShow(img.url, theme)
+                                            : img.url.match(/pdf/i)
+                                                ? PdfShow(img.url, theme)
+                                                : imageShow(img.url, theme)
+                                        : img.type.match(/video/i)
+                                            ? videoShow(URL.createObjectURL(img), theme)
+                                            : img.type.match(/pdf/i)
+                                                ? PdfShow(URL.createObjectURL(img), theme)
+                                                : imageShow(URL.createObjectURL(img), theme)}
                                 <span onClick={() => deleteImages(index)}>&times;</span>
                             </div>
                         ))}
                     </div>
-                    {/* <div className="show_pdf">
-                        {images.map((img, index) => (
-                            <div key={index} id="file_img">
-                                {img.url ? (
-                                    img.url.match(/pdf/i) ? PdfShow(img.url, theme) :
-                                        imageShow(img.url, theme)
-                                ) : (
-                                    img.type.match(/pdf/i) ? PdfShow(URL.createObjectURL(img), theme) :
-                                        imageShow(URL.createObjectURL(img), theme)
-                                )}
-                                <span onClick={() => deleteImages(index)}>&times;</span>
-                            </div>
-                        ))}
-                    </div> */}
 
                     {
-                        stream &&
-                        <div className="stream position-relative">
-                            <video autoPlay muted ref={videoRef} width="100%" height="100%"
-                                style={{ filter: theme ? "invert(1)" : "invert(0)" }} />
+                        stream && (
+                            <div className="stream position-relative">
+                                <video
+                                    autoPlay
+                                    muted
+                                    ref={videoRef}
+                                    width="100%"
+                                    height="100%"
+                                    style={{ filter: theme ? "invert(1)" : "invert(0)" }}
+                                />
 
-                            <span onClick={handleStopStream}>&times;</span>
-                            <canvas ref={refCanvas} style={{ display: "none" }} />
-                        </div>
+                                <span onClick={handleStopStream}>&times;</span>
+                                <canvas ref={refCanvas} style={{ display: "none" }} />
+                            </div>
+                        )
                     }
 
                     <div className="input_images">
-                        {
-                            stream
-                                ? <i className="fas fa-camera" onClick={handleCapture} />
-                                : <>
-                                    <i className="fas fa-camera" onClick={handleStream} />
+                        {stream ? (
+                            <i className="fas fa-camera" onClick={handleCapture} />
+                        ) : (
+                            <>
+                                <i className="fas fa-camera" onClick={handleStream} />
 
-                                    <div className="file_upload">
-                                        <i className="fas fa-image" />
-                                        <input type="file" name="file" id="file"
-                                            multiple accept="image/*,video/*" onChange={handleChangeImages} />
-                                    </div>
-                                </>
-                        }
+                                <div className="file_upload">
+                                    <i className="fas fa-image" />
+                                    <input
+                                        type="file"
+                                        name="file"
+                                        id="file"
+                                        multiple
+                                        accept="image/*,video/*"
+                                        onChange={handleChangeImages}
+                                    />
+                                </div>
+                            </>
+                        )}
                     </div>
-                </div>
+                </div >
 
                 <div className="status_footer">
                     <button className="btn btn-secondary w-100" type="submit">
                         Upload
                     </button>
                 </div>
+            </form >
+        </div >
+    );
+};
 
-            </form>
-        </div>
-    )
-}
-
-export default StatusModal
+export default StatusModal;
