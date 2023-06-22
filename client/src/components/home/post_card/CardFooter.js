@@ -84,7 +84,7 @@ const CardFooter = ({ post }) => {
                     <Link to={`/post/${post._id}`} className="text-dark">
                         <i className="far fa-comment-alt" />
                     </Link>
-                    <i class="far fa-paper-plane" aria-hidden="true" src={Send} alt="Send" onClick={() => setIsShare(!isShare)} />
+                    <i className="far fa-paper-plane" aria-hidden="true" src={Send} alt="Send" onClick={() => setIsShare(!isShare)} />
                 </div>
 
                 {

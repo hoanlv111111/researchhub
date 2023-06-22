@@ -23,7 +23,7 @@ const Menu = () => {
 
     return (
         <div className="menu">
-            <ul class="navbar-nav flex-row align-items-center justify-content-between">
+            <ul className="navbar-nav flex-row align-items-center justify-content-between">
                 {
                     navLinks.map((link, index) => (
                         <li className={`nav-item px-3 ${isActive(link.path)}`} key={index}>

@@ -16,6 +16,7 @@ const StatusModal = () => {
     const [images, setImages] = useState([]);
     const [typePost, setTypePost] = useState("Article");
     const [dateOfPublication, setDateOfPublication] = useState(currentDate);
+    const [hashtag, setHashtag] = useState("");
 
     const [stream, setStream] = useState(false);
     const videoRef = useRef();
@@ -96,6 +97,7 @@ const StatusModal = () => {
                     images,
                     typePost,
                     dateOfPublication,
+                    hashtag,
                     auth,
                     status,
                 })
@@ -107,6 +109,7 @@ const StatusModal = () => {
                     images,
                     typePost,
                     dateOfPublication,
+                    hashtag,
                     auth,
                     socket,
                 })
@@ -116,6 +119,7 @@ const StatusModal = () => {
         setContent("");
         setImages([]);
         setTypePost("");
+        setHashtag("");
         if (tracks) tracks.stop();
         dispatch({ type: GLOBALTYPES.STATUS, payload: false });
     };
@@ -126,6 +130,7 @@ const StatusModal = () => {
             setImages(status.images);
             setTypePost(status.typePost);
             setDateOfPublication(status.dateOfPublication);
+            setHashtag(status.hashtag);
         }
     }, [status]);
 
@@ -173,7 +178,16 @@ const StatusModal = () => {
                                     <option value="Preprint">Preprint</option>
                                 </select>
                                 <span>Date of publication</span>
-                                <BasicDatePicker onChange={handleDateChange} />
+                                <BasicDatePicker value={dateOfPublication} onChange={handleDateChange} />
+                            </div>
+                            <div className="create_post_item">
+                                <span>Hashtags</span>
+                                <input
+                                    type="text"
+                                    placeholder="Enter hashtags separated by commas"
+                                    value={hashtag}
+                                    onChange={(e) => setHashtag(e.target.value)}
+                                />
                             </div>
                         </form>
                     </div>

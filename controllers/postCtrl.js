@@ -35,10 +35,10 @@ const postCtrl = {
     },
     createPost: async (req, res) => {
         try {
-            const { content, images, typePost, dateOfPublication, hashtags } = req.body
+            const { content, images, typePost, dateOfPublication, hashtag } = req.body
 
             const newPost = new Posts({
-                content, images, typePost, dateOfPublication, hashtags, user: req.user._id
+                content, images, typePost, dateOfPublication, hashtag, user: req.user._id
             })
             await newPost.save()
 
@@ -82,28 +82,30 @@ const postCtrl = {
     },
     updatePost: async (req, res) => {
         try {
-            const { content, images, typePost, dateOfPublication, hashtags } = req.body
+            const { content, images, typePost, dateOfPublication, hashtag } = req.body;
 
-            const post = await Posts.findOneAndUpdate({ _id: req.params.id }, {
-                content, images
-            }).populate("user likes", "avatar username fullname")
+            const hashtagArray = hashtag.split(",").map(tag => tag.trim());
+
+            const post = await Posts.findOneAndUpdate(
+                { _id: req.params.id },
+                { content, images, typePost, dateOfPublication, hashtag: hashtagArray },
+                { new: true }
+            )
+                .populate("user likes", "avatar username fullname")
                 .populate({
                     path: "comments",
                     populate: {
                         path: "user likes",
-                        select: "-password"
-                    }
-                })
+                        select: "-password",
+                    },
+                });
 
             res.json({
                 msg: "Updated Post!",
-                newPost: {
-                    ...post._doc,
-                    content, images, typePost, dateOfPublication, hashtags
-                }
-            })
+                newPost: post,
+            });
         } catch (err) {
-            return res.status(500).json({ msg: err.message })
+            return res.status(500).json({ msg: err.message });
         }
     },
     likePost: async (req, res) => {
@@ -262,23 +264,25 @@ const postCtrl = {
             return res.status(500).json({ msg: err.message })
         }
     },
-    // getPostByHashtag: async (req, res) => {
-    //     try {
-    //         const features = new APIfeatures(Posts.find({
-    //             hashtag: { $in: [req.params.hashtag] }
-    //         }), req.query).paginating()
+    getPostByHashtag: async (req, res) => {
+        try {
+            const hashtag = req.params.hashtag;
+            console.log("hashtag on server ", hashtag);
 
-    //         const posts = await features.query.sort("-createdAt")
+            const features = await new APIfeatures(Posts.find({ hashtag: { $in: [hashtag] } }), req.query)
+                .paginating();
+            const posts = await features.query.sort("-createdAt");
+            console.log("posts", posts);
 
-    //         res.json({
-    //             msg: "Success!",
-    //             result: posts.length,
-    //             posts
-    //         })
-    //     } catch (err) {
-    //         return res.status(500).json({ msg: err.message })
-    //     }
-    // }
+            res.json({
+                msg: "Success!",
+                result: posts.length,
+                posts,
+            });
+        } catch (err) {
+            return res.status(500).json({ msg: err.message });
+        }
+    }
 }
 
 module.exports = postCtrl
