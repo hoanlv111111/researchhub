@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const getDataAPI = async (url, token) => {
-    const res = await axios.get(`/api/${url}`, {
+    const res = await axios.get(`https://researchhubbe.onrender.com/api/${url}`, {
         headers: { Authorization: token }
     })
     return res;
