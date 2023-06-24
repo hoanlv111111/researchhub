@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation, useHistory, Link } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { getDataAPI } from "../utils/fetchData";
 import { GLOBALTYPES } from "../redux/actions/globalTypes";
 import UserCard from "../components/UserCard";
 import LoadIcon from "../images/loading.gif";
 import RightSideBar from "../components/home/RightSideBar";
-import ReactMarkdown from "react-markdown";
+import PostCard from "../components/PostCard";
 
 const SearchPage = () => {
     const location = useLocation();
@@ -26,8 +26,7 @@ const SearchPage = () => {
         const query = queryParams.get("q");
 
         setSearch(query);
-        setTab(type === "post" ? 1 : 0); // Update tab based on type parameter
-
+        setTab(type === "post" ? 1 : 0);
         const searchUsers = async () => {
             try {
                 setLoading(true);
@@ -68,7 +67,7 @@ const SearchPage = () => {
     const handleSearch = (e) => {
         e.preventDefault();
         const formattedQuery = search.replace(/\s+/g, "%20");
-        const url = `/search?type=${tab === 1 ? "post" : "user"}&q=${formattedQuery}`; // Generate URL based on current tab
+        const url = `/search?type=${tab === 1 ? "post" : "user"}&q=${formattedQuery}`;
         history.push(url);
     };
 
@@ -129,17 +128,12 @@ const SearchPage = () => {
                                 </div>
                             )}
                             {tab === 1 && (
-                                <div className="posts abc">
+                                <div className="posts">
                                     {posts.length === 0 ? (
                                         <h2>No Post Found</h2>
                                     ) : (
                                         posts.map((post) => (
-                                            <Link to={`/post/${post._id}`} key={post._id}>
-                                                <div key={post._id}>
-                                                    <ReactMarkdown>{post.content}</ReactMarkdown>
-                                                    <p>Author: <UserCard user={post.user} /></p>
-                                                </div>
-                                            </Link>
+                                            <PostCard key={post._id} post={post} />
                                         ))
                                     )}
                                 </div>

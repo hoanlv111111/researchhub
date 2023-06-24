@@ -159,3 +159,11 @@
     justify-content: center;
     flex-direction: column;
 }
+
+#root>div.App.false>div>div.row.mx-0>div.search_page.col-md-9>div.search_results>div.posts {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

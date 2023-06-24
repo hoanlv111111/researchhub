@@ -1,42 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getPostByHashtag } from "../../redux/actions/postAction";
 import Posts from "../../components/home/Posts";
 import { Link } from "react-router-dom";
 import UserCard from "../../components/UserCard";
 import ReactMarkdown from "react-markdown";
+import { getDataAPI } from "../../utils/fetchData";
+import PostCard from "../../components/PostCard";
 
 const Hashtag = () => {
     const { id: hashtag } = useParams();
-    const { auth } = useSelector(state => state);
-
-    const [posts, setPosts] = useState([]);
-    const dispatch = useDispatch();
+    const { auth } = useSelector((state) => state);
+    const [check, setCheck] = useState([])
 
     useEffect(() => {
-        dispatch(getPostByHashtag(hashtag, auth.token));
-    }, [dispatch, hashtag, auth.token]);
-
-    if (!posts || posts.length === 0) {
-        console.log("No posts found.", posts);
-        return <div>Hashtag: {hashtag} No posts found.</div>;
-    }
+        const fetchData = async () => {
+            const res = await getDataAPI(`hashtag/${hashtag}`, auth.token);
+            const data = res.data.posts;
+            setCheck(data)
+            console.log("data", data)
+        }
+        fetchData();
+    }, [1])
 
     return (
-        <div>
+        <div className="posts">
             <h1>Hashtag id: #{hashtag}</h1>
-            <div className="posts abc">
-                {posts.length === 0 ? (
+            <div className="">
+                {check.length === 0 ? (
                     <h2>No Post Found</h2>
                 ) : (
-                    posts.map((post) => (
-                        <Link to={`/post/${post._id}`} key={post._id}>
-                            <div key={post._id}>
-                                <ReactMarkdown>{post.content}</ReactMarkdown>
-                                <p>Author: <UserCard user={post.user} /></p>
-                            </div>
-                        </Link>
+                    check.map((post) => (
+                        <PostCard key={post._id} post={post} />
                     ))
                 )}
             </div>
