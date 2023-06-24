@@ -36,19 +36,27 @@ const Register = () => {
         if (auth.token) history.push("/");
     }, [auth.token, history]);
 
-    const handleInstitutionSearch = async (query) => {
-        try {
-            const response = await axios.get("http://universities.hipolabs.com/search", {
-                params: {
-                    name: query,
-                },
-            });
+    let timeoutId = null;
 
-            const institutions = response.data.map((item) => item.name);
-            setInstitutionOptions(institutions);
-        } catch (error) {
-            console.error("Error fetching institutions:", error);
-        }
+    const handleInstitutionSearch = (query) => {
+        clearTimeout(timeoutId);
+
+        timeoutId = setTimeout(async () => {
+            try {
+                const response = await axios.get(
+                    "https://raw.githubusercontent.com/hoanlv214/university-domains-list/master/world_universities_and_domains.json"
+                );
+
+                const institutions = response.data.filter(
+                    (item) => item.name.toLowerCase().includes(query.toLowerCase())
+                );
+
+                const institutionNames = institutions.map((item) => item.name);
+                setInstitutionOptions(institutionNames);
+            } catch (error) {
+                console.error("Error fetching institutions:", error);
+            }
+        }, 2000);
     };
 
     const handleChangeInput = (e) => {
