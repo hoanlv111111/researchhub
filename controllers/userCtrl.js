@@ -24,11 +24,11 @@ const userCtrl = {
     },
     updateUser: async (req, res) => {
         try {
-            const { avatar, fullname, mobile, institution, story, website, gender } = req.body
+            const { avatar, fullname, mobile, institution, skill, story, website, gender } = req.body
             if (!fullname) return res.status(400).json({ msg: "Please add your full name." })
 
             await Users.findOneAndUpdate({ _id: req.user._id }, {
-                avatar, fullname, mobile, institution, story, website, gender
+                avatar, fullname, mobile, institution, skill, story, website, gender
             })
 
             res.json({ msg: "Update Success!" })
@@ -75,27 +75,51 @@ const userCtrl = {
     },
     suggestionsUser: async (req, res) => {
         try {
-            const newArr = [...req.user.following, req.user._id]
+            const newArr = [...req.user.following, req.user._id];
+            const num = req.query.num || 10;
 
-            const num = req.query.num || 10
+            // Get the user's institution and skills
+            const userInstitution = req.user.institution;
+            const userSkills = req.user.skill;
 
             const users = await Users.aggregate([
-                { $match: { _id: { $nin: newArr } } },
+                {
+                    $match: {
+                        _id: { $nin: newArr },
+                        $or: [
+                            { institution: userInstitution },
+                            { skill: { $in: userSkills } }
+                        ]
+                    }
+                },
                 { $sample: { size: Number(num) } },
                 { $lookup: { from: "users", localField: "followers", foreignField: "_id", as: "followers" } },
                 { $lookup: { from: "users", localField: "following", foreignField: "_id", as: "following" } },
-            ]).project("-password")
+            ]).project("-password");
+
+            if (users.length === 0) {
+                // Fetch users without considering institution or skills filters
+                users = await Users.aggregate([
+                    {
+                        $match: {
+                            _id: { $nin: newArr }
+                        }
+                    },
+                    { $sample: { size: Number(num) } },
+                    { $lookup: { from: "users", localField: "followers", foreignField: "_id", as: "followers" } },
+                    { $lookup: { from: "users", localField: "following", foreignField: "_id", as: "following" } },
+                ]).project("-password");
+            }
 
             return res.json({
                 users,
                 result: users.length
-            })
-
+            });
         } catch (err) {
-            return res.status(500).json({ msg: err.message })
+            return res.status(500).json({ msg: err.message });
         }
-    },
-}
+    }
 
+}
 
 module.exports = userCtrl

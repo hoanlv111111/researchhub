@@ -1,8 +1,24 @@
+import React from "react";
+
 export const PdfShow = ({ src, theme }) => {
+    const downloadPdf = () => {
+        const link = document.createElement("a");
+        link.href = src;
+        link.download = "researchhub-download.pdf";
+        link.click();
+    };
+
     return (
         <div>
-            <img src={src} alt="PDF Thumbnail"
-                style={{ filter: theme ? "invert(1)" : "invert(0)", border: "1px solid black", borderRadius: "10px" }} />
+            <button onClick={downloadPdf} style={{ border: "1px solid black", borderRadius: "10px" }}>
+                <img
+                    src={src}
+                    alt="PDF Thumbnail"
+                    style={{
+                        filter: theme ? "invert(1)" : "invert(0)"
+                    }}
+                />
+            </button>
         </div>
     );
 };

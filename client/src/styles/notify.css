@@ -18,10 +18,9 @@
     justify-content: flex-start;
     flex-direction: column;
     width: 100%;
-    height: 500px;
+    /* height: 500px; */
     padding: 0;
     text-decoration: none;
-    overflow: scroll;
 }
 
 .notify_content .notify_content_text {

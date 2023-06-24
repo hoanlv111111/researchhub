@@ -3,13 +3,16 @@ import { useSelector, useDispatch } from "react-redux"
 import { checkImage } from "../../utils/imageUpload"
 import { GLOBALTYPES } from "../../redux/actions/globalTypes"
 import { updateProfileUser } from "../../redux/actions/profileAction"
+import axios from "axios"
 
 const EditProfile = ({ setOnEdit }) => {
     const initState = {
-        fullname: "", mobile: "", institution: "", website: "", story: "", gender: ""
+        fullname: "", mobile: "", institution: "", skill: "", website: "", story: "", gender: ""
     }
     const [userData, setUserData] = useState(initState)
-    const { fullname, mobile, institution, website, story, gender } = userData
+    const [institutionOptions, setInstitutionOptions] = useState([]);
+
+    const { fullname, mobile, institution, skill, website, story, gender } = userData
 
     const [avatar, setAvatar] = useState("")
 
@@ -32,12 +35,27 @@ const EditProfile = ({ setOnEdit }) => {
         setAvatar(file)
     }
 
-    const handleInput = e => {
-        const { name, value } = e.target
-        setUserData({ ...userData, [name]: value })
-    }
+    const handleInstitutionSearch = async (query) => {
+        try {
+            const response = await axios.get("http://universities.hipolabs.com/search", {
+                params: {
+                    name: query,
+                },
+            });
 
-    const handleSubmit = e => {
+            const institutions = response.data.map((item) => item.name);
+            setInstitutionOptions(institutions);
+        } catch (error) {
+            console.error("Error fetching institutions:", error);
+        }
+    };
+
+    const handleInput = (e) => {
+        const { name, value } = e.target;
+        setUserData({ ...userData, [name]: value })
+    };
+
+    const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(updateProfileUser({ userData, avatar, auth }))
     }
@@ -81,7 +99,28 @@ const EditProfile = ({ setOnEdit }) => {
 
                 <div className="form-group">
                     <label htmlFor="institution">Institution</label>
-                    <input type="text" name="institution" value={institution}
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="institution"
+                        name="institution"
+                        onChange={handleInput}
+                        value={institution}
+                        style={{ background: `${alert.institution ? "#fd2d6a14" : ""}` }}
+                        autoComplete="off"
+                        list="institutionOptions"
+                        onKeyUp={(e) => handleInstitutionSearch(e.target.value)}
+                    />
+                    <datalist id="institutionOptions">
+                        {institutionOptions.map((option) => (
+                            <option key={option} value={option} />
+                        ))}
+                    </datalist>
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="skills">Skills</label>
+                    <input type="text" name="skills" value={skill}
                         className="form-control" onChange={handleInput} />
                 </div>
 

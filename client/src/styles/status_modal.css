@@ -10,7 +10,7 @@
 }
 
 .status_modal form {
-    max-width: 450px;
+    max-width: 1000px;
     width: 100%;
     background: white;
     margin: 30px auto;
@@ -133,6 +133,10 @@
     padding: 0;
 }
 
+.status_body .create_post .create_post_form .rc-md-editor {
+    height: 300px;
+}
+
 .status_body .create_post .title h5 {
     font-size: 1.2rem;
     font-weight: 600;
@@ -151,6 +155,10 @@
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 5px;
+}
+
+.status_body .create_post .create_post_item .react-datepicker-wrapper {
+    width: 100%;
 }
 
 .status_body .create_post .create_post_item input {

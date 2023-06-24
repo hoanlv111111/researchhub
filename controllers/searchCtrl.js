@@ -25,7 +25,21 @@ const searchCtrl = async (req, res) => {
             } catch (err) {
                 return res.status(500).json({ message: err.message });
             }
-        } else if (type === 'user') {
+        }
+        // else if (type === 'hashtag') {
+        //     try {
+        //         const posts = await Posts.find({ hashtag: { $regex: searchTerm, $options: 'i' } })
+        //             .sort("-createdAt")
+        //             .select('content images likes comments user')
+        //             .populate("user", "fullname username avatar")
+        //             .exec();
+        //         console.log(posts);
+        //         res.json({ posts });
+        //     } catch (err) {
+        //         return res.status(500).json({ message: err.message });
+        //     }
+        // }
+        else if (type === 'user') {
             try {
                 results = await Users.find({ username: { $regex: searchTerm, $options: 'i' } })
                     .select("fullname username avatar");

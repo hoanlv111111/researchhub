@@ -29,14 +29,17 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png"
     },
-    tag: {
-        type: String,
-        default: ""
+    skill: {
+        type: Array,
+        default: []
     },
     role: { type: String, default: "user" },
     gender: { type: String, default: "male" },
     mobile: { type: String, default: "" },
-    institution: { type: String, default: "" },
+    institution: {
+        type: String,
+        required: true
+    },
     story: {
         type: String,
         default: "",

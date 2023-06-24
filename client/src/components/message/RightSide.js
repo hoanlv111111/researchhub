@@ -122,36 +122,33 @@ const RightSide = () => {
 
     // Load More
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                if (entries[0].isIntersecting) {
-                    setIsLoadMore((p) => p + 1);
-                }
-            },
-            {
-                threshold: 0.1,
+        const observer = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) {
+                setIsLoadMore(p => p + 1)
             }
-        );
+        }, {
+            threshold: 0.1
+        })
 
-        observer.observe(pageEnd.current);
-    }, [setIsLoadMore]);
+        observer.observe(pageEnd.current)
+    }, [setIsLoadMore])
 
     useEffect(() => {
         if (isLoadMore > 1) {
             if (result >= page * 9) {
-                dispatch(loadMoreMessages({ auth, id, page: page + 1 }));
-                setIsLoadMore(1);
+                dispatch(loadMoreMessages({ auth, id, page: page + 1 }))
+                setIsLoadMore(1)
             }
         }
         // eslint-disable-next-line
-    }, [isLoadMore]);
+    }, [isLoadMore])
 
     const handleDeleteConversation = () => {
-        if (window.confirm("Do you want to delete?")) {
-            dispatch(deleteConversation({ auth, id }));
-            return history.push("/message");
+        if (window.confirm('Do you want to delete?')) {
+            dispatch(deleteConversation({ auth, id }))
+            return history.push('/message')
         }
-    };
+    }
 
     // Call
     const caller = ({ video }) => {
@@ -238,17 +235,13 @@ const RightSide = () => {
                 )}
             </div>
 
-            <div
-                className="chat_container"
-                style={{ height: media.length > 0 ? "calc(100% - 180px)" : "" }}
-            >
+            <div className="chat_container"
+                style={{ height: media.length > 0 ? 'calc(100% - 180px)' : '' }} >
                 <div className="chat_display" ref={refDisplay}>
-                    <button
-                        style={{ marginTop: "-25px", opacity: 0 }}
-                        ref={pageEnd}
-                    >
+                    <button style={{ marginTop: '-25px', opacity: 0 }} ref={pageEnd}>
                         Load more
                     </button>
+
 
                     {data.map((msg, index) => (
                         <div key={index}>

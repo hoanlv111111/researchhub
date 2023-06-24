@@ -129,6 +129,7 @@ img {
     font-size: 1.5rem;
   }
 
+  .right_side_bar,
   .left_side_bar {
     display: none;
   }
@@ -180,6 +181,15 @@ img {
     font-size: 1.5rem;
   }
 
+  .container_home {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    overflow: hidden;
+    background-color: white;
+  }
+
+  .right_side_bar,
   .left_side_bar {
     display: none;
   }

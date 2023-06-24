@@ -11,6 +11,7 @@ import { getDataAPI } from "../utils/fetchData"
 
 const Discover = () => {
     const { auth, discover } = useSelector(state => state)
+    console.log(discover)
     const dispatch = useDispatch()
 
     const [load, setLoad] = useState(false)
@@ -39,9 +40,8 @@ const Discover = () => {
             {/* {
                 discover.loading
                     ? <img src={LoadIcon} alt="loading" className="d-block mx-auto" />
-                    : <PostCard posts={discover.posts} result={discover.result} />
-
-            }*/}
+                    : <Posts posts={discover.posts} result={discover.result} />
+            } */}
 
             {
                 load && <img src={LoadIcon} alt="loading" className="d-block mx-auto" />

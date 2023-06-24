@@ -12,15 +12,14 @@ export const POST_TYPES = {
     DELETE_POST: "DELETE_POST"
 }
 
-
-export const createPost = ({ content, images, typePost, dateOfPublication, auth, socket }) => async (dispatch) => {
+export const createPost = ({ content, images, typePost, dateOfPublication, hashtag, auth, socket }) => async (dispatch) => {
     let media = []
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
         if (images.length > 0) media = await imageUpload(images)
 
-        const res = await postDataAPI("posts", { content, images: media, typePost, dateOfPublication }, auth.token)
-
+        const res = await postDataAPI("posts", { content, images: media, typePost, dateOfPublication, hashtag }, auth.token)
+        console.log("resaaaaa", res)
         dispatch({
             type: POST_TYPES.CREATE_POST,
             payload: { ...res.data.newPost, user: auth.user }
@@ -41,12 +40,7 @@ export const createPost = ({ content, images, typePost, dateOfPublication, auth,
         dispatch(createNotify({ msg, auth, socket }))
 
     } catch (err) {
-        console.log(err.response); // Log the error response to the console for debugging
-        // const error = "An error occurred while creating the post.";
-        // dispatch({
-        //     type: GLOBALTYPES.ALERT,
-        //     payload: { error }
-        // });
+        console.log(err.response);
     }
 }
 
@@ -69,24 +63,33 @@ export const getPosts = (token) => async (dispatch) => {
     }
 }
 
-export const updatePost = ({ content, images, typePost, dateOfPublication, auth, status }) => async (dispatch) => {
+export const updatePost = ({ content, images, typePost, dateOfPublication, hashtag, auth, status }) => async (dispatch) => {
     let media = []
     const imgNewUrl = images.filter(img => !img.url)
     const imgOldUrl = images.filter(img => img.url)
 
-    if (status.content === content
-        && imgNewUrl.length === 0
-        && imgOldUrl.length === status.images.length
-        && typePost === status.typePost
-        && dateOfPublication === status.dateOfPublication
-    ) return;
+    if (
+        status.content === content &&
+        imgNewUrl.length === 0 &&
+        imgOldUrl.length === status.images.length &&
+        typePost === status.typePost &&
+        dateOfPublication === status.dateOfPublication &&
+        hashtag.length === status.hashtag.length &&
+        hashtag.every((hashtag) => status.hashtag.includes(hashtag))
+    ) {
+        return;
+    }
 
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
         if (imgNewUrl.length > 0) media = await imageUpload(imgNewUrl)
 
         const res = await patchDataAPI(`post/${status._id}`, {
-            content, images: [...imgOldUrl, ...media], typePost, dateOfPublication
+            content,
+            images: [...imgOldUrl, ...media],
+            typePost,
+            dateOfPublication,
+            hashtag,
         }, auth.token)
 
         dispatch({ type: POST_TYPES.UPDATE_POST, payload: res.data.newPost })
@@ -95,7 +98,7 @@ export const updatePost = ({ content, images, typePost, dateOfPublication, auth,
     } catch (err) {
         dispatch({
             type: GLOBALTYPES.ALERT,
-            payload: { error: err.response.data.msg }
+            payload: { error: err.response.data.msg },
         })
     }
 }
@@ -233,3 +236,23 @@ export const unSavePost = ({ post, auth }) => async (dispatch) => {
         })
     }
 }
+
+// export const getPostByHashtag = (hashtag, token) => async (dispatch) => {
+//     try {
+//         dispatch({ type: POST_TYPES.LOADING_POST, payload: true })
+//         const res = await getDataAPI(`hashtag/${hashtag}`, token)
+//         console.log("res action", res.data)
+
+//         dispatch({
+//             type: POST_TYPES.GET_POSTS,
+//             payload: { ...res.data, page: 2 }
+//         })
+
+//         dispatch({ type: POST_TYPES.LOADING_POST, payload: false })
+//     } catch (err) {
+//         dispatch({
+//             type: GLOBALTYPES.ALERT,
+//             payload: { error: err.response.data.msg }
+//         })
+//     }
+// }

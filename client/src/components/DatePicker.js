@@ -1,15 +1,25 @@
-import * as React from 'react';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
-export default function BasicDatePicker() {
+export default function BasicDatePicker({ onChange }) {
+    const [selectedDate, setSelectedDate] = useState(null);
+
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
+        if (date) {
+            const timezoneOffset = date.getTimezoneOffset() * 60000;
+            const adjustedDate = new Date(date - timezoneOffset);
+            onChange(adjustedDate.toISOString().slice(0, 10));
+        } else {
+            onChange(null);
+        }
+    };
+
+
     return (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer components={['DatePicker']}>
-                <DatePicker />
-            </DemoContainer>
-        </LocalizationProvider>
+        <div>
+            <DatePicker selected={selectedDate} onChange={handleDateChange} />
+        </div>
     );
 }

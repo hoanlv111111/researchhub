@@ -14,7 +14,7 @@ const Search = () => {
     const [search, setSearch] = useState("");
     const [users, setUsers] = useState([]);
     const [posts, setPosts] = useState([]);
-    const [searchType, setSearchType] = useState(searchTypeOptions[0]);
+    const [searchType] = useState(searchTypeOptions[0]);
 
     const { auth } = useSelector((state) => state);
     const dispatch = useDispatch();
@@ -79,7 +79,7 @@ const Search = () => {
                     className="search_icon"
                     style={{ opacity: search ? 0 : 0.3, fontSize: "larger" }}
                 >
-                    <i className="fa fa-search" hidden="true" aria-hidden="false"></i>
+                    <i className="fa fa-search" aria-hidden="false"></i>
                 </div>
 
                 <div
