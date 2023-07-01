@@ -1,0 +1,486 @@
+[
+    {
+        "name": "Information Technology",
+        "id": "1"
+    },
+    {
+        "name": "Information and Communication Technology",
+        "id": "2"
+    },
+    {
+        "name": "Business Process Management",
+        "id": "3"
+    },
+    {
+        "name": "Information Technologies",
+        "id": "4"
+    },
+    {
+        "name": "IT Project Management",
+        "id": "5"
+    },
+    {
+        "name": "Information Technology Management",
+        "id": "6"
+    },
+    {
+        "name": "Information Analysis",
+        "id": "7"
+    },
+    {
+        "name": "Business Intelligence",
+        "id": "8"
+    },
+    {
+        "name": "Cloud Computing",
+        "id": "9"
+    },
+    {
+        "name": "E-Business",
+        "id": "10"
+    },
+    {
+        "name": "Enterprise Architecture",
+        "id": "11"
+    },
+    {
+        "name": "IT Governance",
+        "id": "12"
+    },
+    {
+        "name": "IT Service Management",
+        "id": "13"
+    },
+    {
+        "name": "Information Systems Engineering",
+        "id": "14"
+    },
+    {
+        "name": "Business Process Modeling",
+        "id": "15"
+    },
+    {
+        "name": "Acoustic Communication",
+        "id": "16"
+    },
+    {
+        "name": "IT Infrastructure",
+        "id": "17"
+    },
+    {
+        "name": "Information System Management",
+        "id": "18"
+    },
+    {
+        "name": "Business Process Analysis",
+        "id": "19"
+    },
+    {
+        "name": "Advisory Committees",
+        "id": "20"
+    },
+    {
+        "name": "Animal Care Committees",
+        "id": "21"
+    },
+    {
+        "name": "Knowledge Management",
+        "id": "22"
+    },
+    {
+        "name": "Business Analytics",
+        "id": "23"
+    },
+    {
+        "name": "Acceptance and Commitment Therapy",
+        "id": "24"
+    },
+    {
+        "name": "IT Architecture",
+        "id": "25"
+    },
+    {
+        "name": "Advanced Communication Systems",
+        "id": "26"
+    },
+    {
+        "name": "Agent Communication Languages",
+        "id": "27"
+    },
+    {
+        "name": "Agent Communication",
+        "id": "28"
+    },
+    {
+        "name": "Business Process Optimization",
+        "id": "29"
+    },
+    {
+        "name": "Information Society",
+        "id": "30"
+    },
+    {
+        "name": "E-Government",
+        "id": "31"
+    },
+    {
+        "name": "Enterprise Resource Planning",
+        "id": "32"
+    },
+    {
+        "name": "BPM",
+        "id": "33"
+    },
+    {
+        "name": "Workflow Management",
+        "id": "34"
+    },
+    {
+        "name": "Business Process Engineering",
+        "id": "35"
+    },
+    {
+        "name": "Nucleoside Q",
+        "id": "36"
+    },
+    {
+        "name": "Magnetic Materials and Magnetism",
+        "id": "37"
+    },
+    {
+        "name": "Ephedra sinica",
+        "id": "38"
+    },
+    {
+        "name": "Bone Marrow Derived Macrophage",
+        "id": "39"
+    },
+    {
+        "name": "Boltzmann Machine",
+        "id": "40"
+    },
+    {
+        "name": "Machine Design",
+        "id": "41"
+    },
+    {
+        "name": "Machine Elements",
+        "id": "42"
+    },
+    {
+        "name": "Machine Ethics",
+        "id": "43"
+    },
+    {
+        "name": "Machine Intelligence",
+        "id": "44"
+    },
+    {
+        "name": "Machine Learning",
+        "id": "45"
+    },
+    {
+        "name": "Machine Mechanics",
+        "id": "46"
+    },
+    {
+        "name": "Enterprise Architecture Management",
+        "id": "47"
+    },
+    {
+        "name": "Project Management for SMEs",
+        "id": "48"
+    },
+    {
+        "name": "Information Sharing",
+        "id": "49"
+    },
+    {
+        "name": "Mobile Business",
+        "id": "50"
+    },
+    {
+        "name": "Requirements Gathering",
+        "id": "51"
+    },
+    {
+        "name": "Web Science",
+        "id": "52"
+    },
+    {
+        "name": "IT Systems Engineering",
+        "id": "53"
+    },
+    {
+        "name": "Algorithms",
+        "id": "54"
+    },
+    {
+        "name": "Data Structures",
+        "id": "55"
+    },
+    {
+        "name": "Database Management",
+        "id": "56"
+    },
+    {
+        "name": "Operating Systems",
+        "id": "57"
+    },
+    {
+        "name": "Software Engineering",
+        "id": "58"
+    },
+    {
+        "name": "Programming Languages",
+        "id": "59"
+    },
+    {
+        "name": "Artificial Intelligence",
+        "id": "60"
+    },
+    {
+        "name": "Computer Graphics",
+        "id": "61"
+    },
+    {
+        "name": "Computer Vision",
+        "id": "62"
+    },
+    {
+        "name": "Machine Vision",
+        "id": "63"
+    },
+    {
+        "name": "Computer Networks",
+        "id": "64"
+    },
+    {
+        "name": "Cybersecurity",
+        "id": "65"
+    },
+    {
+        "name": "Data Mining",
+        "id": "66"
+    },
+    {
+        "name": "Web Development",
+        "id": "67"
+    },
+    {
+        "name": "Mobile App Development",
+        "id": "68"
+    },
+    {
+        "name": "Cloud Computing",
+        "id": "69"
+    },
+    {
+        "name": "Big Data",
+        "id": "70"
+    },
+    {
+        "name": "Computer Architecture",
+        "id": "71"
+    },
+    {
+        "name": "Parallel Computing",
+        "id": "72"
+    },
+    {
+        "name": "Distributed Systems",
+        "id": "73"
+    },
+    {
+        "name": "Natural Language Processing",
+        "id": "74"
+    },
+    {
+        "name": "Computer Security",
+        "id": "75"
+    },
+    {
+        "name": "Software Testing",
+        "id": "76"
+    },
+    {
+        "name": "Human-Computer Interaction",
+        "id": "77"
+    },
+    {
+        "name": "Data Science",
+        "id": "78"
+    },
+    {
+        "name": "Computer Ethics",
+        "id": "79"
+    },
+    {
+        "name": "Robotics",
+        "id": "80"
+    },
+    {
+        "name": "Virtual Reality",
+        "id": "81"
+    },
+    {
+        "name": "Augmented Reality",
+        "id": "82"
+    },
+    {
+        "name": "Computer Forensics",
+        "id": "83"
+    },
+    {
+        "name": "Pharmacology",
+        "id": "84"
+    },
+    {
+        "name": "Pharmaceutical Sciences",
+        "id": "85"
+    },
+    {
+        "name": "Clinical Pharmacy",
+        "id": "86"
+    },
+    {
+        "name": "Drug Development",
+        "id": "87"
+    },
+    {
+        "name": "Pharmaceutical Technology",
+        "id": "88"
+    },
+    {
+        "name": "Medicinal Chemistry",
+        "id": "89"
+    },
+    {
+        "name": "Pharmacokinetics",
+        "id": "90"
+    },
+    {
+        "name": "Pharmacodynamics",
+        "id": "91"
+    },
+    {
+        "name": "Pharmacy Practice",
+        "id": "92"
+    },
+    {
+        "name": "Clinical Trials",
+        "id": "93"
+    },
+    {
+        "name": "Pharmacoepidemiology",
+        "id": "94"
+    },
+    {
+        "name": "Drug Safety",
+        "id": "95"
+    },
+    {
+        "name": "Pharmacogenomics",
+        "id": "96"
+    },
+    {
+        "name": "Drug Interactions",
+        "id": "97"
+    },
+    {
+        "name": "Pharmacy Education",
+        "id": "98"
+    },
+    {
+        "name": "Pharmacy Administration",
+        "id": "99"
+    },
+    {
+        "name": "Pharmacy Informatics",
+        "id": "100"
+    },
+    {
+        "name": "Pharmacy Law",
+        "id": "101"
+    },
+    {
+        "name": "Pharmacy Ethics",
+        "id": "102"
+    },
+    {
+        "name": "Macroeconomics",
+        "id": "103"
+    },
+    {
+        "name": "Microeconomics",
+        "id": "104"
+    },
+    {
+        "name": "Econometrics",
+        "id": "105"
+    },
+    {
+        "name": "International Economics",
+        "id": "106"
+    },
+    {
+        "name": "Development Economics",
+        "id": "107"
+    },
+    {
+        "name": "Financial Economics",
+        "id": "108"
+    },
+    {
+        "name": "Behavioral Economics",
+        "id": "109"
+    },
+    {
+        "name": "Environmental Economics",
+        "id": "110"
+    },
+    {
+        "name": "Labor Economics",
+        "id": "111"
+    },
+    {
+        "name": "Health Economics",
+        "id": "112"
+    },
+    {
+        "name": "Public Economics",
+        "id": "113"
+    },
+    {
+        "name": "Industrial Organization",
+        "id": "114"
+    },
+    {
+        "name": "Financial Markets",
+        "id": "115"
+    },
+    {
+        "name": "Monetary Economics",
+        "id": "116"
+    },
+    {
+        "name": "Economic Policy",
+        "id": "117"
+    },
+    {
+        "name": "Economic Development",
+        "id": "118"
+    },
+    {
+        "name": "Managerial Economics",
+        "id": "119"
+    },
+    {
+        "name": "Applied Economics",
+        "id": "120"
+    },
+    {
+        "name": "Quantitative Economics",
+        "id": "121"
+    }
+]
