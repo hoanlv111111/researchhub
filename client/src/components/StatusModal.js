@@ -165,6 +165,7 @@ const StatusModal = () => {
                                 <select
                                     name="type"
                                     id="type"
+                                    value={typePost}
                                     onChange={(e) => setTypePost(e.target.value)}
                                 >
                                     <option value="Article">Article</option>
