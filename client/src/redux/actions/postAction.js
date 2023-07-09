@@ -236,23 +236,3 @@ export const unSavePost = ({ post, auth }) => async (dispatch) => {
         })
     }
 }
-
-// export const getPostByHashtag = (hashtag, token) => async (dispatch) => {
-//     try {
-//         dispatch({ type: POST_TYPES.LOADING_POST, payload: true })
-//         const res = await getDataAPI(`hashtag/${hashtag}`, token)
-//         console.log("res action", res.data)
-
-//         dispatch({
-//             type: POST_TYPES.GET_POSTS,
-//             payload: { ...res.data, page: 2 }
-//         })
-
-//         dispatch({ type: POST_TYPES.LOADING_POST, payload: false })
-//     } catch (err) {
-//         dispatch({
-//             type: GLOBALTYPES.ALERT,
-//             payload: { error: err.response.data.msg }
-//         })
-//     }
-// }
