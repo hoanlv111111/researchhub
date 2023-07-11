@@ -98,6 +98,9 @@ img {
 /* -------- Publication Modal---------- */
 @import url("./publication_modal.css");
 
+/* -------- Category---------- */
+@import url("./category.css");
+
 /* --------- Responsive ------ */
 @media(max-width: 768px) {
 

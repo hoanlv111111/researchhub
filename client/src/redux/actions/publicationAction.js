@@ -9,11 +9,11 @@ export const PUBLICATION_TYPES = {
     DELETE_PUBLICATION: "DELETE_PUBLICATION",
 }
 
-export const getPublications = ({ id, auth }) => async (dispatch) => {
+export const getPublications = ({ userId, auth }) => async (dispatch) => {
     dispatch({ type: PUBLICATION_TYPES.LOADING, payload: true });
 
     try {
-        const res = await getDataAPI(`publication/${id}`, auth.token);
+        const res = await getDataAPI(`publication/${userId}`, auth.token);
         console.log("res action:", res.data);
         dispatch({
             type: PUBLICATION_TYPES.GET_PUBLICATION,

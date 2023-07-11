@@ -19,7 +19,7 @@ const PublicationTab = ({ id }) => {
         const fetchData = async () => {
             try {
                 dispatch({ type: PUBLICATION_TYPES.LOADING, payload: true });
-                const res = await dispatch(getPublications({ id: auth.user._id, auth }));
+                const res = await dispatch(getPublications({ userId: id, auth }));
                 console.log("res publications:", res);
                 if (res) {
                     console.log("res.data:", res);
@@ -34,7 +34,7 @@ const PublicationTab = ({ id }) => {
             }
         };
         fetchData();
-    }, [dispatch, auth]);
+    }, [id, dispatch, auth]);
 
     useEffect(() => {
         if (showModal) {
