@@ -64,7 +64,11 @@ const Menu = () => {
                         <Link className="dropdown-item" to={`/profile/${auth.user._id}`}>
                             <span className="material-icons" style={{ fontSize: "15px" }}>manage_accounts</span> Profile
                         </Link>
-
+                        {auth.user.role === "admin" && (
+                            <Link className="dropdown-item" to="/admin">
+                                <span className="material-icons" style={{ fontSize: "15px" }}>admin_panel_settings</span> Admin
+                            </Link>
+                        )}
                         <label htmlFor="theme" className="dropdown-item align-items-center justify-content-start"
                             onClick={() => dispatch({
                                 type: GLOBALTYPES.THEME, payload: !theme

@@ -101,6 +101,9 @@ img {
 /* -------- Category---------- */
 @import url("./category.css");
 
+/* -------- Admin ----------- */
+@import url("./admin.css");
+
 /* --------- Responsive ------ */
 @media(max-width: 768px) {
 

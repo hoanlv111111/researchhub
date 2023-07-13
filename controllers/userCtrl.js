@@ -22,6 +22,14 @@ const userCtrl = {
             return res.status(500).json({ msg: err.message })
         }
     },
+    getUsers: async (req, res) => {
+        try {
+            const users = await Users.find().select("-password")
+            res.json({ users })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
     updateUser: async (req, res) => {
         try {
             const { avatar, fullname, mobile, institution, skill, story, website, gender } = req.body

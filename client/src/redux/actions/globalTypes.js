@@ -1,5 +1,6 @@
 export const GLOBALTYPES = {
     AUTH: "AUTH",
+    ADMIN_REDIRECT: "ADMIN_REDIRECT",
     ALERT: "ALERT",
     THEME: "THEME",
     STATUS: "STATUS",

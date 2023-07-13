@@ -7,6 +7,7 @@ export const login = (data) => async (dispatch) => {
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
         const res = await postDataAPI("login", data)
+
         dispatch({
             type: GLOBALTYPES.AUTH,
             payload: {
@@ -22,6 +23,13 @@ export const login = (data) => async (dispatch) => {
                 success: res.data.msg
             }
         })
+
+        if (res.data.user.role === "admin") {
+            dispatch({
+                type: GLOBALTYPES.ADMIN_REDIRECT,
+                payload: true
+            })
+        }
 
     } catch (err) {
         if (err.response.status === 400) {
@@ -41,7 +49,6 @@ export const login = (data) => async (dispatch) => {
         }
     }
 }
-
 
 export const refreshToken = () => async (dispatch) => {
     const firstLogin = localStorage.getItem("firstLogin")
