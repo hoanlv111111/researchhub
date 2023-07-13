@@ -33,7 +33,6 @@ app.use("/api", require("./routes/messageRouter"))
 app.use("/api", require("./routes/searchRouter"))
 app.use("/api", require("./routes/publicationRouter"))
 app.use("/api", require("./routes/categoryRouter"))
-app.use("/api", require("./routes/adminRouter"))
 
 const URI = process.env.MONGODB_URL
 mongoose.connect(URI, {
