@@ -79,3 +79,16 @@
 .category-tab__content__item__actions {
     margin-left: 10px;
 }
+
+/* ------------ Deatail ------------- */
+.category {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.category li:hover {
+    cursor: pointer;
+    color: violet;
+}

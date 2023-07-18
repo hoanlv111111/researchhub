@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createCategory, updateCategory } from "../redux/actions/categoryAction";
 import { GLOBALTYPES } from "../redux/actions/globalTypes";
+import { getDataAPI } from "../utils/fetchData";
 
 const CategoryModal = ({ setShowModal, selectedCategory }) => {
     const { auth } = useSelector((state) => state);
+    const id = auth.user._id;
     const dispatch = useDispatch();
 
     const [topic, setTopic] = useState("");
     const [postID, setPostID] = useState("");
+    const [userPosts, setUserPosts] = useState([]);
+    const [selectedPost, setSelectedPost] = useState([]);
 
     useEffect(() => {
         if (selectedCategory) {
@@ -20,6 +24,28 @@ const CategoryModal = ({ setShowModal, selectedCategory }) => {
         }
     }, [selectedCategory]);
 
+    useEffect(() => {
+        const fetchUserPosts = async () => {
+            try {
+                const res = await getDataAPI(`user_posts/${id}`, auth.token);
+                const data = res.data.posts
+                setUserPosts(data);
+            } catch (error) {
+                console.error("Error fetching user posts:", error);
+            }
+        };
+        fetchUserPosts();
+    }, [id, auth.token]);
+
+    const handlePostSelection = (e) => {
+        const selectedPostID = e.target.value;
+        setSelectedPost([...selectedPost, selectedPostID]);
+    };
+
+    const removeSelectedPost = (postID) => {
+        setSelectedPost(selectedPost.filter((selected) => selected !== postID));
+    };
+
     const handleCloseModal = () => {
         setShowModal(false);
     };
@@ -29,17 +55,19 @@ const CategoryModal = ({ setShowModal, selectedCategory }) => {
         try {
             const category = {
                 topic,
-                postID
+                postID: selectedPost, // Use selectedPost instead of postID
             };
 
             if (selectedCategory) {
                 // Update existing category
-                const res = await dispatch(updateCategory(selectedCategory._id, category, auth.token));
+                const res = await dispatch(
+                    updateCategory(selectedCategory._id, category, auth.token)
+                );
                 console.log("update category", res);
                 if (res && res.data) {
                     dispatch({
                         type: GLOBALTYPES.ALERT,
-                        payload: { success: "Category updated successfully" }
+                        payload: { success: "Category updated successfully" },
                     });
                 } else {
                     throw new Error("Invalid response");
@@ -49,10 +77,10 @@ const CategoryModal = ({ setShowModal, selectedCategory }) => {
                 const res = await dispatch(createCategory(category, auth.token));
                 console.log("create category", res);
                 if (res && res.data) {
-                    console.log(res, res.data)
+                    console.log(res, res.data);
                     dispatch({
                         type: GLOBALTYPES.ALERT,
-                        payload: { success: "Category created successfully" }
+                        payload: { success: "Category created successfully" },
                     });
                     handleCloseModal();
                 } else {
@@ -83,13 +111,29 @@ const CategoryModal = ({ setShowModal, selectedCategory }) => {
                         onChange={(e) => setTopic(e.target.value)}
                     />
                     <label htmlFor="postID">Post ID</label>
-                    <input
-                        type="text"
-                        placeholder="Enter post ID"
+                    <select
                         id="postID"
                         value={postID}
-                        onChange={(e) => setPostID(e.target.value)}
-                    />
+                        onChange={handlePostSelection}
+                    >
+                        {userPosts.map((post) => (
+                            <option key={post._id} value={post._id}>
+                                {post._id}
+                            </option>
+                        ))}
+                    </select>
+                    <div className="selected-posts">
+                        {selectedPost.map((postID) => (
+                            <li
+                                key={postID}
+                                value={postID}
+                                className="selected-post"
+                                onClick={() => removeSelectedPost(postID)}
+                            >
+                                {postID}
+                            </li>
+                        ))}
+                    </div>
                 </div>
                 <div className="form__group">
                     <button type="submit" className="btn btn-primary">

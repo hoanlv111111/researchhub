@@ -82,10 +82,10 @@ const categoryCtrl = {
     },
     updateCategory: async (req, res) => {
         try {
-            const { topic } = req.body;
+            const { topic, postID } = req.body;
 
             await Category.findOneAndUpdate({ _id: req.params.id }, {
-                topic
+                topic, postID
             });
 
             res.json({ msg: "Updated Category!" });
