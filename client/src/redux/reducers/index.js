@@ -15,6 +15,8 @@ import message from "./messageReducer"
 import online from "./onlineReducer"
 import call from "./callReducer"
 import peer from "./peerReducer"
+import publication from "./publicationReducer"
+import category from "./categoryReducer"
 
 
 export default combineReducers({
@@ -33,5 +35,7 @@ export default combineReducers({
     message,
     online,
     call,
-    peer
+    peer,
+    publication,
+    category
 })

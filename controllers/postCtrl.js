@@ -267,12 +267,10 @@ const postCtrl = {
     getPostByHashtag: async (req, res) => {
         try {
             const hashtag = req.params.hashtag;
-            console.log("hashtag on server ", hashtag);
 
             const features = await new APIfeatures(Posts.find({ hashtag: { $in: [hashtag] } }), req.query)
                 .paginating();
             const posts = await features.query.sort("-createdAt");
-            console.log("posts", posts);
 
             res.json({
                 msg: "Success!",

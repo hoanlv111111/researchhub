@@ -38,11 +38,13 @@ const PageRender = () => {
     const Component = generatePage(pageName);
 
     if (pageName === "login" || pageName === "register" || Component) {
+        if (page === "admin" && auth.user?.role !== "admin") {
+            return <NotFound />;
+        }
         return Component;
     } else {
         return <NotFound />;
     }
-
 };
 
 export default PageRender;

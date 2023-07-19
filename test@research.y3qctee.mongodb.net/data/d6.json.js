@@ -1,1 +1,0 @@
-window.repositoryObject = {"object_id":"d6","name":"test@research.y3qctee.mongodb.net","description":null,"summary":[{"field":"Host","value":"research.y3qctee.mongodb.net"},{"field":"Database","value":"test"},{"field":"DBMS","value":"MongoDB"}],"modules":[{"id":"m107","name":"ER"}],"dbObjects":[{"count":6,"id":"d6t","name":"Tables"}],"show_schema":false};

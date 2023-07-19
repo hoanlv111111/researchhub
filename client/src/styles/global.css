@@ -95,6 +95,15 @@ img {
 /* -------- Search---------- */
 @import url("./search.css");
 
+/* -------- Publication Modal---------- */
+@import url("./publication_modal.css");
+
+/* -------- Category---------- */
+@import url("./category.css");
+
+/* -------- Admin ----------- */
+@import url("./admin.css");
+
 /* --------- Responsive ------ */
 @media(max-width: 768px) {
 
@@ -145,6 +154,10 @@ img {
 
   .status {
     padding: 20px 10px;
+  }
+
+  .profile_tab button {
+    font-size: 15px;
   }
 }
 
@@ -204,6 +217,10 @@ img {
 
   .status {
     padding: 20px 10px;
+  }
+
+  .profile_tab button {
+    font-size: 15px;
   }
 }
 
