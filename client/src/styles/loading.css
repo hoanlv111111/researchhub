@@ -18,7 +18,7 @@
     }
 }
 
-.loading polygon {
+.loading circle {
     stroke-dasharray: 22;
     stroke-dashoffset: 1;
     animation: dash 4s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite alternate-reverse;

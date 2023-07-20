@@ -185,7 +185,7 @@ const StatusModal = () => {
                                 <span>Hashtags</span>
                                 <input
                                     type="text"
-                                    placeholder="Enter hashtags separated by commas"
+                                    placeholder="e.g: IT, AI, ML"
                                     value={hashtag}
                                     onChange={(e) => setHashtag(e.target.value)}
                                 />

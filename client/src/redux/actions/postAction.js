@@ -19,7 +19,7 @@ export const createPost = ({ content, images, typePost, dateOfPublication, hasht
         if (images.length > 0) media = await imageUpload(images)
 
         const res = await postDataAPI("posts", { content, images: media, typePost, dateOfPublication, hashtag }, auth.token)
-        console.log("resaaaaa", res)
+        console.log("resaaaaa", res.data.newPost._id)
         dispatch({
             type: POST_TYPES.CREATE_POST,
             payload: { ...res.data.newPost, user: auth.user }
@@ -30,17 +30,16 @@ export const createPost = ({ content, images, typePost, dateOfPublication, hasht
         // Notify
         const msg = {
             id: res.data.newPost._id,
-            text: `added a new ${typePost}.`,
+            text: `added a new post.`,
             recipients: res.data.newPost.user.followers,
             url: `/post/${res.data.newPost._id}`,
             content,
-            image: media[0].url
         }
-
+        console.log("msg", msg)
         dispatch(createNotify({ msg, auth, socket }))
 
     } catch (err) {
-        console.log(err.response);
+        console.log(err);
     }
 }
 
@@ -105,44 +104,30 @@ export const updatePost = ({ content, images, typePost, dateOfPublication, hasht
 
 export const likePost = ({ post, auth, socket }) => async (dispatch) => {
     const newPost = { ...post, likes: [...post.likes, auth.user] }
+    console.log({ newPost })
     dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost })
 
-    socket.emit("likePost", newPost)
+    socket.emit('likePost', newPost)
 
-    const maxRetries = 3; // Maximum number of retries
-    let retries = 0; // Current number of retries
+    try {
+        await patchDataAPI(`post/${post._id}/like`, null, auth.token)
 
-    while (retries < maxRetries) {
-        try {
-            await patchDataAPI(`post/${post._id}/like`, null, auth.token)
-
-            // Notify
-            const msg = {
-                id: auth.user._id,
-                text: "like your post.",
-                recipients: [post.user._id],
-                url: `/post/${post._id}`,
-                content: post.content,
-                image: post.images[0].url
-            }
-
-            dispatch(createNotify({ msg, auth, socket }))
-            break; // Exit the loop if operation is successful
-
-        } catch (err) {
-            if (retries === maxRetries - 1) {
-                // Dispatch a generic error message or log the error
-                dispatch({
-                    type: GLOBALTYPES.ALERT,
-                    payload: { error: "An error occurred while liking the post." }
-                });
-                break; // Exit the loop after reaching maximum retries
-            } else {
-                // Retry the operation after a delay (e.g. 1 second)
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                retries++;
-            }
+        // Notify
+        const msg = {
+            id: auth.user._id,
+            text: 'like your post.',
+            recipients: [post.user._id],
+            url: `/post/${post._id}`,
+            content: post.content
         }
+
+        dispatch(createNotify({ msg, auth, socket }))
+
+    } catch (err) {
+        dispatch({
+            type: GLOBALTYPES.ALERT,
+            payload: { error: err.response.data.msg }
+        })
     }
 }
 
@@ -195,7 +180,7 @@ export const deletePost = ({ post, auth, socket }) => async (dispatch) => {
         // Notify
         const msg = {
             id: post._id,
-            text: `added a new ${post.typePost}.`,
+            text: `added a new post.`,
             recipients: res.data.newPost.user.followers,
             url: `/post/${post._id}`,
         }

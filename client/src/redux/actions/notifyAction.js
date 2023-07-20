@@ -11,6 +11,7 @@ export const NOTIFY_TYPES = {
 }
 
 export const createNotify = ({ msg, auth, socket }) => async (dispatch) => {
+    console.log({ msg })
     try {
         const res = await postDataAPI("notify", msg, auth.token)
 
