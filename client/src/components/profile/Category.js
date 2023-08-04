@@ -87,7 +87,6 @@ const CategoryTab = ({ id }) => {
     return (
         <div className="category-tab">
             <div className="category-tab__header">
-                <h3>Categories</h3>
                 {auth.user?._id === id && (
                     <button className="btn btn-primary" onClick={() => setShowModal(true)}>
                         Add Category
@@ -98,6 +97,7 @@ const CategoryTab = ({ id }) => {
                 <p>No categories available</p>
             ) : (
                 <div className="category-tab__content">
+                    <h3>Categories</h3>
                     {categories.map((category) => (
                         <div className="category-tab__content__item" key={category._id}>
                             <div className="category-tab__content__item__name">
