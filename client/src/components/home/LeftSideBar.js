@@ -24,21 +24,21 @@ const LeftSidebar = () => {
                         <NavLink exact to={`/profile/${auth.user._id}`} activeClassName="activeClicked">
                             <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
                         </NavLink>
-                        <NavLink exact to="/analytics" activeClassName="activeClicked">
+                        {/* <NavLink exact to="/" activeClassName="activeClicked">
                             <CDBSidebarMenuItem icon="chart-line">Analytics</CDBSidebarMenuItem>
                         </NavLink>
-                        <NavLink exact to="/groups" activeClassName="activeClicked">
+                        <NavLink exact to="/" activeClassName="activeClicked">
                             <CDBSidebarMenuItem icon="users">Groups</CDBSidebarMenuItem>
                         </NavLink>
-                        <NavLink exact to="/notifications" activeClassName="activeClicked">
+                        <NavLink exact to="/" activeClassName="activeClicked">
                             <CDBSidebarMenuItem icon="bell">Notifications</CDBSidebarMenuItem>
                         </NavLink>
-                        <NavLink exact to="/settings" activeClassName="activeClicked">
+                        <NavLink exact to="/" activeClassName="activeClicked">
                             <CDBSidebarMenuItem icon="cogs">Settings</CDBSidebarMenuItem>
                         </NavLink>
-                        <NavLink exact to="/help" activeClassName="activeClicked">
+                        <NavLink exact to="/" activeClassName="activeClicked">
                             <CDBSidebarMenuItem icon="question-circle">Help</CDBSidebarMenuItem>
-                        </NavLink>
+                        </NavLink> */}
                     </CDBSidebarMenu>
                 </CDBSidebarContent>
             </CDBSidebar>

@@ -23,7 +23,7 @@ const CardBody = ({ post, theme }) => {
                         {readMore ? "Hide content" : "Read more"}
                     </span>
                 )}
-                {post.hashtag && Array.isArray(post.hashtag) && post.hashtag.length > 0 && (
+                {post.hashtag && post.hashtag.length > 0 && post.hashtag[0] !== "" && (
                     <div className="hashtags">
                         {post.hashtag.map((hashtag, index) => (
                             <Link
