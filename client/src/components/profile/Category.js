@@ -90,7 +90,7 @@ const CategoryTab = ({ id }) => {
                 <h3>Categories</h3>
                 {auth.user?._id === id && (
                     <button className="btn btn-primary" onClick={() => setShowModal(true)}>
-                        <i className="fas fa-plus"></i>
+                        Add Category
                     </button>
                 )}
             </div>
