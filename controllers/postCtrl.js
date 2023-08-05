@@ -50,8 +50,6 @@ const postCtrl = {
 
             await newPost.save();
 
-            console.log(newPost);
-
             res.json({
                 msg: "Created Post!",
                 newPost: {

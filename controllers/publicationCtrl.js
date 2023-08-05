@@ -28,7 +28,7 @@ const publicationCtrl = {
     getPublication: async (req, res) => {
         try {
             const publications = await Publication.find({ user: req.params.id }).populate("user", "fullname avatar");
-            console.log("publications server getPublication:", publications);
+            // console.log("publications server getPublication:", publications);
 
             if (!publications || publications.length === 0) {
                 return res.status(404).json({ msg: "No publications found for this user" });
@@ -49,11 +49,12 @@ const publicationCtrl = {
                 { new: true }
             );
 
-            if (!updatedPublication) {
-                return res.status(404).json({ msg: 'Publication not found' });
-            }
+            console.log("updated pub", updatedPublication)
 
-            res.json({ msg: "Publication updated successfully", newPublication: updatedPublication });
+            res.json({
+                msg: "Publication updated successfully",
+                newPublication: updatedPublication
+            });
         } catch (err) {
             return res.status(500).json({ msg: err.message });
         }

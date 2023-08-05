@@ -30,7 +30,7 @@ export const createPost = ({ content, images, typePost, dateOfPublication, hasht
         // Notify
         const msg = {
             id: res.data.newPost._id,
-            text: `added a new post.`,
+            text: `added a new ${typePost}.`,
             recipients: res.data.newPost.user.followers,
             url: `/post/${res.data.newPost._id}`,
             content,

@@ -18,14 +18,14 @@ const PublicationTab = ({ id }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                dispatch({ type: PUBLICATION_TYPES.LOADING, payload: true });
+                dispatch({ type: PUBLICATION_TYPES.LOADING_PUBLICATION, payload: true });
                 const res = await dispatch(getPublications({ userId: id, auth }));
                 console.log("res publications:", res);
                 if (res) {
                     console.log("res.data:", res);
                     setPublications(res);
                 }
-                dispatch({ type: PUBLICATION_TYPES.LOADING, payload: false });
+                dispatch({ type: PUBLICATION_TYPES.LOADING_PUBLICATION, payload: false });
             } catch (err) {
                 dispatch({
                     type: GLOBALTYPES.ALERT,
@@ -48,7 +48,6 @@ const PublicationTab = ({ id }) => {
         try {
             if (selectedPublicationId) {
                 const response = await dispatch(updatePublication(selectedPublicationId, newPublication, auth.token));
-                console.log("update publication", response);
                 if (response && response.data) {
                     dispatch({ type: GLOBALTYPES.ALERT, payload: { success: "Publication updated successfully" } });
                     handleCloseModal();
@@ -57,7 +56,6 @@ const PublicationTab = ({ id }) => {
                 }
             } else {
                 const response = await dispatch(createPublication(newPublication, auth.token));
-                console.log("create publication", response);
                 if (response && response.data) {
                     dispatch({ type: GLOBALTYPES.ALERT, payload: { success: "Publication created successfully" } });
                     handleCloseModal();

@@ -159,3 +159,9 @@
     justify-content: center;
     flex-direction: column;
 }
+
+.search_results .users {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}

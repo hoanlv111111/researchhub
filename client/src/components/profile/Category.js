@@ -93,11 +93,11 @@ const CategoryTab = ({ id }) => {
                     </button>
                 )}
             </div>
+            <h2>Categories</h2>
             {categories.length === 0 ? (
                 <p>No categories available</p>
             ) : (
                 <div className="category-tab__content">
-                    <h3>Categories</h3>
                     {categories.map((category) => (
                         <div className="category-tab__content__item" key={category._id}>
                             <div className="category-tab__content__item__name">

@@ -60,7 +60,6 @@ const Info = ({ id, auth, profile, dispatch }) => {
                                     {user.following.length} Following
                                 </span>
                             </div>
-
                             <p>{user.story}</p>
                             <p className="m-0">{user.institution}</p>
                             <h6 className="m-0">{user.skill.join(" | ")}</h6>

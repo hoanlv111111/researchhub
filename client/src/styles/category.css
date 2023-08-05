@@ -62,7 +62,6 @@
 
 .category-tab__content__item {
     flex: 0 0 25%;
-    /* Adjust this value to control the width of each item */
     display: flex;
     align-items: center;
     justify-content: space-between;
