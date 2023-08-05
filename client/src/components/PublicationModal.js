@@ -22,7 +22,6 @@ const PublicationModal = ({ setShowModal, selectedPublication }) => {
         if (selectedPublication) {
             setTitle(selectedPublication.title);
             setCitation(selectedPublication.citation);
-            setYear(selectedPublication.year);
             setDescription(selectedPublication.description);
             setAuthor(selectedPublication.author);
             setConference(selectedPublication.conference);
@@ -60,6 +59,9 @@ const PublicationModal = ({ setShowModal, selectedPublication }) => {
             };
 
             if (selectedPublication) {
+                console.log("selectedPublication._id:", selectedPublication._id);
+                console.log("newPublication:", newPublication);
+                console.log("auth.token:", auth.token);
                 dispatch(updatePublication(selectedPublication._id, newPublication, auth.token));
                 console.log(selectedPublication._id)
                 dispatch({ type: GLOBALTYPES.ALERT, payload: { success: "Publication updated successfully" } });
@@ -68,10 +70,11 @@ const PublicationModal = ({ setShowModal, selectedPublication }) => {
                 dispatch({ type: GLOBALTYPES.ALERT, payload: { success: "Publication created successfully" } });
             }
         } catch (err) {
-            dispatch({
-                type: GLOBALTYPES.ALERT,
-                payload: { error: err.message },
-            });
+            console.log("err", err)
+            // dispatch({
+            //     type: GLOBALTYPES.ALERT,
+            //     payload: { error: err.message },
+            // });
         }
     };
 

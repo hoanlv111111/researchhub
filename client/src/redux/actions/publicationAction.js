@@ -32,7 +32,7 @@ export const getPublications = ({ userId, auth }) => async (dispatch) => {
 export const createPublication = (newPublication, auth) => async (dispatch) => {
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } });
-        const res = await postDataAPI("publication", newPublication, auth.token);
+        const res = await postDataAPI("publication", newPublication, auth);
         console.log("res create pub:", res);
         dispatch({
             type: PUBLICATION_TYPES.CREATE_PUBLICATION,

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPublications, createPublication, updatePublication, deletePublication } from "../../redux/actions/publicationAction";
+import { getPublications, deletePublication } from "../../redux/actions/publicationAction";
 import { GLOBALTYPES } from "../../redux/actions/globalTypes";
 import { PUBLICATION_TYPES } from "../../redux/actions/publicationAction";
 import PublicationModal from "../PublicationModal";
@@ -44,33 +44,6 @@ const PublicationTab = ({ id }) => {
         }
     }, [showModal, dispatch]);
 
-    const handleSubmitPublication = async (newPublication) => {
-        try {
-            if (selectedPublicationId) {
-                const response = await dispatch(updatePublication(selectedPublicationId, newPublication, auth.token));
-                if (response && response.data) {
-                    dispatch({ type: GLOBALTYPES.ALERT, payload: { success: "Publication updated successfully" } });
-                    handleCloseModal();
-                } else {
-                    throw new Error("Invalid response");
-                }
-            } else {
-                const response = await dispatch(createPublication(newPublication, auth.token));
-                if (response && response.data) {
-                    dispatch({ type: GLOBALTYPES.ALERT, payload: { success: "Publication created successfully" } });
-                    handleCloseModal();
-                } else {
-                    throw new Error("Invalid response");
-                }
-            }
-        } catch (err) {
-            dispatch({
-                type: GLOBALTYPES.ALERT,
-                payload: { error: err.message },
-            });
-        }
-    };
-
     const handleDeletePublication = (publicationId) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this publication?");
         if (confirmDelete) {
@@ -79,10 +52,10 @@ const PublicationTab = ({ id }) => {
         }
     };
 
-    const handleCloseModal = () => {
-        setShowModal(false);
-        setSelectedPublicationId(null);
-    };
+    // const handleCloseModal = () => {
+    //     setShowModal(false);
+    //     setSelectedPublicationId(null);
+    // };
 
     return (
         <div className="pub_tab">
@@ -147,7 +120,6 @@ const PublicationTab = ({ id }) => {
                             ? publications.find((pub) => pub._id === selectedPublicationId) || null
                             : null
                     }
-                    handleSubmitPublication={handleSubmitPublication}
                 />
             )}
         </div>
