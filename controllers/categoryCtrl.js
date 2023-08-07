@@ -11,27 +11,31 @@ const categoryCtrl = {
             let category = await Category.findOne({ topic });
 
             if (!category) {
-                // Nếu category chưa tồn tại, tạo category mới và thêm postID vào mảng postID
+                // Nếu category chưa tồn tại, tạo category mới và thêm các postID vào mảng postID
                 category = new Category({
                     userID: req.user._id,
                     topic,
-                    postID: [postID], // Add postID to the postID array
+                    postID: postID, // Gán mảng postID vào mảng postID của category
                 });
             } else {
-                // Nếu category đã tồn tại, kiểm tra xem postID đã tồn tại trong mảng postID của category chưa
-                if (category.postID.includes(postID)) {
-                    return res
-                        .status(400)
-                        .json({ msg: "Post already added to this category" });
+                // Lọc ra các postID đã tồn tại trong mảng postID của category
+                const existingPostIDs = category.postID.map(id => id.toString());
+
+                // Lọc ra các postID chưa tồn tại trong mảng postID của category
+                const newPostIDs = postID.filter(id => !existingPostIDs.includes(id));
+
+                if (newPostIDs.length === 0) {
+                    return res.status(400).json({ msg: "All posts already added to this category" });
                 }
 
-                // Thêm postID vào mảng postID của category
-                category.postID.push(postID);
+                // Thêm các postID mới vào mảng postID của category
+                category.postID.push(...newPostIDs);
             }
 
+            console.log("new cate create", category);
             await category.save();
 
-            res.json({ msg: "Post added to category", category });
+            res.json({ msg: "Posts added to category", category });
         } catch (err) {
             return res.status(500).json({ msg: err.message });
         }

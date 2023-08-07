@@ -24,17 +24,13 @@ const CategoryPage = () => {
         fetchData();
     }, [auth.token, categoryId]);
 
-    const handlePostClick = (postID) => {
+    const handlePostClick = async (postID) => {
         setSelectedPostId(postID);
         setSelectedPost(null); // reset selected post
-        fetchPostDetails(postID);
-    };
 
-    const fetchPostDetails = async (postID) => {
         try {
             const res = await getDataAPI(`post/${postID}`, auth.token);
             const data = res.data.post;
-            console.log(data);
             setSelectedPost(data);
         } catch (error) {
             console.error("Error fetching post:", error);
@@ -47,7 +43,7 @@ const CategoryPage = () => {
 
     return (
         <div className="category">
-            <div className="col-md-3">
+            <div className="col-md-4">
                 <h3>{category.topic}</h3>
                 <div className="">
                     <ul>
@@ -55,7 +51,7 @@ const CategoryPage = () => {
                             <li
                                 key={postID}
                                 onClick={() => handlePostClick(postID)}
-                                className="category__link"
+                                className={`category__link ${postID === selectedPostId ? 'active' : ''}`}
                             >
                                 {postID}
                             </li>
@@ -63,7 +59,7 @@ const CategoryPage = () => {
                     </ul>
                 </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-8">
                 {selectedPostId ? (
                     <div className="posts">
                         <h4>Post Details</h4>

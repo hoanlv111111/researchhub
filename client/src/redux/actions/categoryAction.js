@@ -15,6 +15,7 @@ export const createCategory = (category, token) => async (dispatch) => {
 
         // Convert an empty string to an empty array for postID
         category.postID = category.postID || [];
+        console.log("category action", category)
 
         const res = await postDataAPI("category", category, token);
 
@@ -25,7 +26,7 @@ export const createCategory = (category, token) => async (dispatch) => {
 
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } });
 
-        return res; // Return the response to the component
+        return res;
     } catch (err) {
         dispatch({
             type: GLOBALTYPES.ALERT,

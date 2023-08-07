@@ -7,7 +7,7 @@ import PublicationModal from "../PublicationModal";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
-const PublicationTab = ({ id }) => {
+const PublicationTab = ({ id, theme }) => {
     const { auth } = useSelector((state) => state);
     const [publications, setPublications] = useState([]);
     const [showModal, setShowModal] = useState(false);
@@ -52,13 +52,8 @@ const PublicationTab = ({ id }) => {
         }
     };
 
-    // const handleCloseModal = () => {
-    //     setShowModal(false);
-    //     setSelectedPublicationId(null);
-    // };
-
     return (
-        <div className="pub_tab">
+        <div className="pub_tab" style={{ filter: `${theme ? "invert(1)" : "invert(0)"}` }}>
             {auth.user._id === id && (
                 <button className="btn btn-primary" onClick={() => setShowModal(true)}>
                     Add Publication
