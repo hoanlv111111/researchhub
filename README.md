@@ -1,4 +1,4 @@
-# Social Network for Researchers
+# Social Network for Researchers share publication, research and research ideas
 
 This is a social network application for researchers. It allows researchers to connect, share their work, and collaborate with others in their field.
 
@@ -6,13 +6,14 @@ This is a social network application for researchers. It allows researchers to c
 
 To set up the application, follow these steps:
 
-1. ```
+1. Clone project:
+   ```
    git clone git@github.com:hoanlv214/researchhub.git
    ```
 2.  Install the server dependencies:
-   ```
-   npm install
-   ```
+      ```
+      npm install
+      ```
 
 3. Install the client dependencies:
    ```
@@ -27,21 +28,21 @@ To set up the application, follow these steps:
 You can run both the client and server concurrently, or run them separately as needed.
 
 To run the client and server concurrently, use the following command:
-```
-npm run dev
-```
+   ```
+   npm run dev
+   ```
 This will start the server and client simultaneously.
 
 To run only the Express server, use the following command:
-```
-npm run server
-```
+   ```
+   npm run server
+   ```
 This will start the server on `http://localhost:5000`.
 
 To run only the React client, use the following command:
-```
-npm run client
-```
+   ```
+   npm run client
+   ```
 This will start the client on `http://localhost:3000`.
 
 Please make sure to run the server and client in separate terminal windows or tabs.
@@ -67,6 +68,10 @@ The application provides the following functions:
 9. Messaging: Users can engage in private conversations with other users.
 10. User Suggestions: Users can receive suggestions of other users based on their institution or skill. This feature helps users connect with researchers who have similar interests or expertise.
 Please refer to the application's documentation for more detailed information on each function.
+11. Add Publications: Users can add their publications to their profile.
+12. Custom posts: Users can create custom posts with custom categories.
+13. Search: Users can search for other users, posts, and publications.
+15. User Profile: Users can view their own profile to see their posts, publications,...
 
 ## Contributing
 
