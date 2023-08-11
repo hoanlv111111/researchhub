@@ -5,25 +5,36 @@ import { getDataAPI } from "../../utils/fetchData";
 import moment from "moment";
 import Avatar from "../../components/Avatar";
 import { Link } from "react-router-dom";
+import LoadIcon from "../../images/loading.gif";
 
 const PublicationPage = () => {
     const { id: publicationId } = useParams();
     const { auth } = useSelector((state) => state);
+    const [loading, setLoading] = useState(true); // Add a loading state
     const [publication, setPublication] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
             try {
                 const res = await getDataAPI(`user_publications/${publicationId}`, auth.token);
-                console.log("res publication:", res);
                 const data = res.data;
                 setPublication(data);
             } catch (error) {
                 console.error("Error fetching publication:", error);
             }
+            setLoading(false);
         };
         fetchData();
     }, [auth.token, publicationId]);
+
+    if (loading) {
+        return (
+            <div className="loading-container">
+                <img src={LoadIcon} alt="loading" className="d-block mx-auto" />
+            </div>
+        );
+    }
 
     if (!publication) {
         return <h2>No Publication Found</h2>;

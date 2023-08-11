@@ -5,6 +5,7 @@ import { GLOBALTYPES } from "../../redux/actions/globalTypes";
 import { PUBLICATION_TYPES } from "../../redux/actions/publicationAction";
 import PublicationModal from "../PublicationModal";
 import { Link } from "react-router-dom";
+import LoadIcon from "../../images/loading.gif";
 import moment from "moment";
 
 const PublicationTab = ({ id, theme }) => {
@@ -12,11 +13,13 @@ const PublicationTab = ({ id, theme }) => {
     const [publications, setPublications] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedPublicationId, setSelectedPublicationId] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true)
             try {
                 dispatch({ type: PUBLICATION_TYPES.LOADING_PUBLICATION, payload: true });
                 const res = await dispatch(getPublications({ userId: id, auth }));
@@ -32,6 +35,7 @@ const PublicationTab = ({ id, theme }) => {
                     payload: { error: err.response.data.msg },
                 });
             }
+            setLoading(false);
         };
         fetchData();
     }, [id, dispatch, auth]);
@@ -51,6 +55,14 @@ const PublicationTab = ({ id, theme }) => {
             console.log("delete publication:", publicationId);
         }
     };
+
+    if (loading) {
+        return (
+            <div className="loading-container">
+                <img src={LoadIcon} alt="loading" className="d-block mx-auto" />
+            </div>
+        );
+    }
 
     return (
         <div className="pub_tab" style={{ filter: `${theme ? "invert(1)" : "invert(0)"}` }}>

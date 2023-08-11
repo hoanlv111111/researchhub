@@ -18,7 +18,7 @@ const CardBody = ({ post, theme }) => {
                 }}
             >
                 {renderedContent}
-                {post.content.length > 100 && (
+                {post.content.length > 200 && (
                     <span className="readMore" onClick={() => setReadMore(!readMore)}>
                         {readMore ? "Hide content" : "Read more"}
                     </span>

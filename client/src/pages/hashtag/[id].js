@@ -3,10 +3,12 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getDataAPI } from "../../utils/fetchData";
 import PostCard from "../../components/PostCard";
+import LoadIcon from "../../images/loading.gif";
 
 const Hashtag = () => {
     const { id: hashtag } = useParams();
     const { auth } = useSelector((state) => state);
+    const [loading, setLoading] = useState(true);
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
@@ -18,14 +20,14 @@ const Hashtag = () => {
                     data.map(async (post) => {
                         const userRes = await getDataAPI(`user/${post.user}`, auth.token);
                         const userData = userRes.data;
-                        console.log("userData", userData);
                         return { ...post, user: userData.user };
                     })
                 );
-                console.log("postsWithUser", postsWithUser);
                 setPosts(postsWithUser);
+                setLoading(false);
             } catch (error) {
                 console.error("Error fetching posts:", error);
+                setLoading(false);
             }
         };
         fetchData();
@@ -36,14 +38,13 @@ const Hashtag = () => {
             <h1>Hashtag: #{hashtag}</h1>
 
             <div className="">
-                {posts.length === 0 ? (
+                {loading ? (
+                    <img src={LoadIcon} alt="loading" className="d-block mx-auto" />
+                ) : posts.length === 0 ? (
                     <h2>No Post Found</h2>
                 ) : (
                     posts.map((post) => (
-                        <>
-                            <PostCard key={post._id} post={post} />
-                            {console.log("postcard hashtag", post)}
-                        </>
+                        <PostCard key={post._id} post={post} />
                     ))
                 )}
             </div>

@@ -71,6 +71,7 @@
     font-size: 14px;
 }
 
+/* -------------------Publication detail --------------- */
 .publication {
     width: 100%;
     height: 100%;
@@ -78,13 +79,12 @@
     border-radius: 5px;
     padding: 10px;
     display: flex;
-    align-items: start;
+    align-items: flex-start;
 }
 
 .publication a {
     text-decoration: none;
     color: #000;
-
 }
 
 .publication .publication_info {
