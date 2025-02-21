@@ -35,14 +35,20 @@ const postCtrl = {
     },
     createPost: async (req, res) => {
         try {
-            const { content, images, typePost, dateOfPublication, hashtag } = req.body
+            const { content, images, typePost, dateOfPublication, hashtag } = req.body;
+
+            const hashtagArray = hashtag.split(", ").map(tag => tag.trim());
 
             const newPost = new Posts({
-                content, images, typePost, dateOfPublication, hashtag, user: req.user._id
-            })
-            await newPost.save()
+                content,
+                images,
+                typePost,
+                dateOfPublication,
+                hashtag: hashtagArray, // Assign the hashtag array
+                user: req.user._id
+            });
 
-            console.log(newPost)
+            await newPost.save();
 
             res.json({
                 msg: "Created Post!",
@@ -50,9 +56,9 @@ const postCtrl = {
                     ...newPost._doc,
                     user: req.user
                 }
-            })
+            });
         } catch (err) {
-            return res.status(500).json({ msg: err.message })
+            return res.status(500).json({ msg: err.message });
         }
     },
     getPosts: async (req, res) => {
@@ -105,6 +111,7 @@ const postCtrl = {
                 newPost: post,
             });
         } catch (err) {
+            console.log("err", err);
             return res.status(500).json({ msg: err.message });
         }
     },

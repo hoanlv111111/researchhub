@@ -22,6 +22,11 @@ const PublicationModal = ({ setShowModal, selectedPublication }) => {
         if (selectedPublication) {
             setTitle(selectedPublication.title);
             setCitation(selectedPublication.citation);
+            setDescription(selectedPublication.description);
+            setAuthor(selectedPublication.author);
+            setConference(selectedPublication.conference);
+            setPages(selectedPublication.pages);
+            setPublisher(selectedPublication.publisher);
             setYear(selectedPublication.year);
         } else {
             setTitle("");
@@ -54,25 +59,12 @@ const PublicationModal = ({ setShowModal, selectedPublication }) => {
             };
 
             if (selectedPublication) {
-                // Update existing publication
-                const response = await dispatch(updatePublication(selectedPublication._id, newPublication, auth.token));
-                console.log("update publication", response);
-                if (response && response.data) {
-                    dispatch({ type: GLOBALTYPES.ALERT, payload: { success: "Publication updated successfully" } });
-                    handleCloseModal();
-                } else {
-                    throw new Error("Invalid response");
-                }
+                dispatch(updatePublication(selectedPublication._id, newPublication, auth.token));
+                console.log(selectedPublication._id)
+                dispatch({ type: GLOBALTYPES.ALERT, payload: { success: "Publication updated successfully" } });
             } else {
-                // Create new publication
-                const response = await dispatch(createPublication(newPublication, auth.token));
-                console.log("create publication", response);
-                if (response && response.data) {
-                    dispatch({ type: GLOBALTYPES.ALERT, payload: { success: "Publication created successfully" } });
-                    handleCloseModal();
-                } else {
-                    throw new Error("Invalid response");
-                }
+                dispatch(createPublication(newPublication, auth.token));
+                dispatch({ type: GLOBALTYPES.ALERT, payload: { success: "Publication created successfully" } });
             }
         } catch (err) {
             dispatch({
@@ -104,13 +96,13 @@ const PublicationModal = ({ setShowModal, selectedPublication }) => {
                     <label htmlFor="citation" className="form-label">
                         Citation
                     </label>
-                    <textarea
+                    <input
                         className="form-control"
                         id="citation"
                         value={citation}
                         onChange={(e) => setCitation(e.target.value)}
                         required
-                    ></textarea>
+                    />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="description" className="form-label">

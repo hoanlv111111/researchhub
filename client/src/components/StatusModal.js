@@ -169,14 +169,15 @@ const StatusModal = () => {
                                     onChange={(e) => setTypePost(e.target.value)}
                                 >
                                     <option value="Article">Article</option>
-                                    <option value="thesis">Thesis</option>
+                                    <option value="Thesis">Thesis</option>
                                     <option value="Book">Book</option>
                                     <option value="Patent">Patent</option>
-                                    <option value="Other">Other</option>
                                     <option value="Conference">Conference</option>
                                     <option value="Journal">Journal</option>
                                     <option value="Report">Report</option>
                                     <option value="Preprint">Preprint</option>
+                                    <option value="Chapter">Chapter</option>
+                                    <option value="Other">Other</option>
                                 </select>
                                 <span>Date of publication</span>
                                 <BasicDatePicker value={dateOfPublication} onChange={handleDateChange} />
@@ -185,7 +186,7 @@ const StatusModal = () => {
                                 <span>Hashtags</span>
                                 <input
                                     type="text"
-                                    placeholder="Enter hashtags separated by commas"
+                                    placeholder="e.g: IT, AI, ML"
                                     value={hashtag}
                                     onChange={(e) => setHashtag(e.target.value)}
                                 />

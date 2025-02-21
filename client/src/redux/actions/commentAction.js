@@ -28,7 +28,6 @@ export const createComment = ({ post, newComment, auth, socket }) => async (disp
                 recipients: newComment.reply ? [newComment.tag._id] : [post.user._id],
                 url: `/post/${post._id}`,
                 content: post.content,
-                image: post.images && post.images.length > 0 ? post.images[0].url : ""
             }
 
             dispatch(createNotify({ msg, auth, socket }))

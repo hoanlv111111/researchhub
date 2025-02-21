@@ -4,12 +4,12 @@ const Notifies = require("../models/notifyModel")
 const notifyCtrl = {
     createNotify: async (req, res) => {
         try {
-            const { id, recipients, url, text, content, image } = req.body
+            const { id, recipients, url, text, content } = req.body
 
             if (recipients.includes(req.user._id.toString())) return;
 
             const notify = new Notifies({
-                id, recipients, url, text, content, image, user: req.user._id
+                id, recipients, url, text, content, user: req.user._id
             })
 
             await notify.save()

@@ -34,7 +34,6 @@ const userSchema = new mongoose.Schema({
     }],
     role: { type: String, default: "user" },
     gender: { type: String, default: "male" },
-    mobile: { type: String, default: "" },
     institution: {
         type: String,
         required: true

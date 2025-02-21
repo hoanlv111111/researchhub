@@ -10,17 +10,19 @@ const CategoryModal = ({ setShowModal, selectedCategory }) => {
     const dispatch = useDispatch();
 
     const [topic, setTopic] = useState("");
-    const [postID, setPostID] = useState("");
     const [userPosts, setUserPosts] = useState([]);
     const [selectedPost, setSelectedPost] = useState([]);
+    const [existingPostIDs, setExistingPostIDs] = useState([]);
 
     useEffect(() => {
         if (selectedCategory) {
             setTopic(selectedCategory.topic);
-            setPostID(selectedCategory.postID);
+            setSelectedPost(selectedCategory.postID);
+            setExistingPostIDs(selectedCategory.postID);
         } else {
             setTopic("");
-            setPostID("");
+            setSelectedPost([]);
+            setExistingPostIDs([]);
         }
     }, [selectedCategory]);
 
@@ -28,7 +30,7 @@ const CategoryModal = ({ setShowModal, selectedCategory }) => {
         const fetchUserPosts = async () => {
             try {
                 const res = await getDataAPI(`user_posts/${id}`, auth.token);
-                const data = res.data.posts
+                const data = res.data.posts;
                 setUserPosts(data);
             } catch (error) {
                 console.error("Error fetching user posts:", error);
@@ -55,15 +57,13 @@ const CategoryModal = ({ setShowModal, selectedCategory }) => {
         try {
             const category = {
                 topic,
-                postID: selectedPost, // Use selectedPost instead of postID
+                postID: selectedPost,
             };
 
             if (selectedCategory) {
-                // Update existing category
                 const res = await dispatch(
                     updateCategory(selectedCategory._id, category, auth.token)
                 );
-                console.log("update category", res);
                 if (res && res.data) {
                     dispatch({
                         type: GLOBALTYPES.ALERT,
@@ -73,11 +73,8 @@ const CategoryModal = ({ setShowModal, selectedCategory }) => {
                     throw new Error("Invalid response");
                 }
             } else {
-                // Create new category
                 const res = await dispatch(createCategory(category, auth.token));
-                console.log("create category", res);
                 if (res && res.data) {
-                    console.log(res, res.data);
                     dispatch({
                         type: GLOBALTYPES.ALERT,
                         payload: { success: "Category created successfully" },
@@ -110,12 +107,19 @@ const CategoryModal = ({ setShowModal, selectedCategory }) => {
                         value={topic}
                         onChange={(e) => setTopic(e.target.value)}
                     />
-                    <label htmlFor="postID">Post ID</label>
+                    <label htmlFor="existingPostIDs">Existing Post IDs</label>
+                    <input
+                        type="text"
+                        id="existingPostIDs"
+                        value={existingPostIDs.join(', ')}
+                        disabled
+                    />
+                    <label htmlFor="selectPost">Select Post to Add</label>
                     <select
-                        id="postID"
-                        value={postID}
+                        id="selectPost"
                         onChange={handlePostSelection}
                     >
+                        <option value="">Select a post</option>
                         {userPosts.map((post) => (
                             <option key={post._id} value={post._id}>
                                 {post._id}
@@ -126,7 +130,6 @@ const CategoryModal = ({ setShowModal, selectedCategory }) => {
                         {selectedPost.map((postID) => (
                             <li
                                 key={postID}
-                                value={postID}
                                 className="selected-post"
                                 onClick={() => removeSelectedPost(postID)}
                             >

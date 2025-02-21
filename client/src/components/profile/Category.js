@@ -5,16 +5,20 @@ import { GLOBALTYPES } from "../../redux/actions/globalTypes";
 import { CATEGORY_TYPES } from "../../redux/actions/categoryAction";
 import CategoryModal from "../CategoryModal";
 import { Link } from "react-router-dom";
+import LoadIcon from "../../images/loading.gif";
 
 const CategoryTab = ({ id }) => {
     const { auth } = useSelector((state) => state);
     const [categories, setCategories] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedCategoryId, setSelectedCategoryId] = useState(null);
+    const [loading, setLoading] = useState(true);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
             try {
                 dispatch({ type: CATEGORY_TYPES.LOADING, payload: true });
                 const res = await dispatch(getCategories({ userID: id, auth }));
@@ -30,6 +34,7 @@ const CategoryTab = ({ id }) => {
                     payload: { error: err.response.data.msg },
                 });
             }
+            setLoading(false);
         };
         fetchData();
     }, [dispatch, id, auth]);
@@ -87,13 +92,14 @@ const CategoryTab = ({ id }) => {
     return (
         <div className="category-tab">
             <div className="category-tab__header">
-                <h3>Categories</h3>
                 {auth.user?._id === id && (
                     <button className="btn btn-primary" onClick={() => setShowModal(true)}>
-                        <i className="fas fa-plus"></i>
+                        Add Category
                     </button>
                 )}
             </div>
+            <h2>Categories</h2>
+            {loading && <img src={LoadIcon} alt="loading" className="d-block mx-auto my-4" />}
             {categories.length === 0 ? (
                 <p>No categories available</p>
             ) : (

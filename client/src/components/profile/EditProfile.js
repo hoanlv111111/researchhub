@@ -8,7 +8,6 @@ import axios from "axios";
 const EditProfile = ({ setOnEdit }) => {
     const initState = {
         fullname: "",
-        mobile: "",
         institution: "",
         skill: [],
         website: "",
@@ -20,7 +19,7 @@ const EditProfile = ({ setOnEdit }) => {
     const [skillOptions, setSkillOptions] = useState([]);
     const [selectedSkills, setSelectedSkills] = useState([]);
 
-    const { fullname, mobile, institution, website, story, gender } = userData;
+    const { fullname, institution, website, story, gender } = userData;
 
     const [avatar, setAvatar] = useState("");
 
@@ -144,14 +143,6 @@ const EditProfile = ({ setOnEdit }) => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="mobile">Mobile</label>
-                    <input type="text" name="mobile" value={mobile}
-                        className="form-control"
-                        onChange={handleInput}
-                    />
-                </div>
-
-                <div className="form-group">
                     <label htmlFor="institution">Institution</label>
                     <input
                         type="text"
@@ -222,7 +213,7 @@ const EditProfile = ({ setOnEdit }) => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="story">Story</label>
+                    <label htmlFor="story">Introduction</label>
                     <textarea
                         name="story"
                         value={story}

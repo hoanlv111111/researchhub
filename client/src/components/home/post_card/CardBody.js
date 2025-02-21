@@ -18,12 +18,12 @@ const CardBody = ({ post, theme }) => {
                 }}
             >
                 {renderedContent}
-                {post.content.length > 100 && (
+                {post.content.length > 200 && (
                     <span className="readMore" onClick={() => setReadMore(!readMore)}>
                         {readMore ? "Hide content" : "Read more"}
                     </span>
                 )}
-                {post.hashtag && Array.isArray(post.hashtag) && post.hashtag.length > 0 && (
+                {post.hashtag && post.hashtag.length > 0 && post.hashtag[0] !== "" && (
                     <div className="hashtags">
                         {post.hashtag.map((hashtag, index) => (
                             <Link

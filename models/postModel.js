@@ -16,7 +16,7 @@ const postSchema = new mongoose.Schema({
     dateOfPublication: {
         type: Date,
     },
-    hashtag: [{ type: String }],
+    hashtag: Array,
     likes: [{ type: mongoose.Types.ObjectId, ref: "user" }],
     comments: [{ type: mongoose.Types.ObjectId, ref: "comment" }],
     user: { type: mongoose.Types.ObjectId, ref: "user" }

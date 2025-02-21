@@ -1,37 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPublications, createPublication, updatePublication, deletePublication } from "../../redux/actions/publicationAction";
+import { getPublications, deletePublication } from "../../redux/actions/publicationAction";
 import { GLOBALTYPES } from "../../redux/actions/globalTypes";
 import { PUBLICATION_TYPES } from "../../redux/actions/publicationAction";
 import PublicationModal from "../PublicationModal";
 import { Link } from "react-router-dom";
+import LoadIcon from "../../images/loading.gif";
 import moment from "moment";
 
-const PublicationTab = ({ id }) => {
+const PublicationTab = ({ id, theme }) => {
     const { auth } = useSelector((state) => state);
     const [publications, setPublications] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedPublicationId, setSelectedPublicationId] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true)
             try {
-                dispatch({ type: PUBLICATION_TYPES.LOADING, payload: true });
+                dispatch({ type: PUBLICATION_TYPES.LOADING_PUBLICATION, payload: true });
                 const res = await dispatch(getPublications({ userId: id, auth }));
                 console.log("res publications:", res);
                 if (res) {
                     console.log("res.data:", res);
                     setPublications(res);
                 }
-                dispatch({ type: PUBLICATION_TYPES.LOADING, payload: false });
+                dispatch({ type: PUBLICATION_TYPES.LOADING_PUBLICATION, payload: false });
             } catch (err) {
                 dispatch({
                     type: GLOBALTYPES.ALERT,
                     payload: { error: err.response.data.msg },
                 });
             }
+            setLoading(false);
         };
         fetchData();
     }, [id, dispatch, auth]);
@@ -44,35 +48,6 @@ const PublicationTab = ({ id }) => {
         }
     }, [showModal, dispatch]);
 
-    const handleSubmitPublication = async (newPublication) => {
-        try {
-            if (selectedPublicationId) {
-                const response = await dispatch(updatePublication(selectedPublicationId, newPublication, auth.token));
-                console.log("update publication", response);
-                if (response && response.data) {
-                    dispatch({ type: GLOBALTYPES.ALERT, payload: { success: "Publication updated successfully" } });
-                    handleCloseModal();
-                } else {
-                    throw new Error("Invalid response");
-                }
-            } else {
-                const response = await dispatch(createPublication(newPublication, auth.token));
-                console.log("create publication", response);
-                if (response && response.data) {
-                    dispatch({ type: GLOBALTYPES.ALERT, payload: { success: "Publication created successfully" } });
-                    handleCloseModal();
-                } else {
-                    throw new Error("Invalid response");
-                }
-            }
-        } catch (err) {
-            dispatch({
-                type: GLOBALTYPES.ALERT,
-                payload: { error: err.message },
-            });
-        }
-    };
-
     const handleDeletePublication = (publicationId) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this publication?");
         if (confirmDelete) {
@@ -81,13 +56,16 @@ const PublicationTab = ({ id }) => {
         }
     };
 
-    const handleCloseModal = () => {
-        setShowModal(false);
-        setSelectedPublicationId(null);
-    };
+    if (loading) {
+        return (
+            <div className="loading-container">
+                <img src={LoadIcon} alt="loading" className="d-block mx-auto" />
+            </div>
+        );
+    }
 
     return (
-        <div className="pub_tab">
+        <div className="pub_tab" style={{ filter: `${theme ? "invert(1)" : "invert(0)"}` }}>
             {auth.user._id === id && (
                 <button className="btn btn-primary" onClick={() => setShowModal(true)}>
                     Add Publication
@@ -149,7 +127,6 @@ const PublicationTab = ({ id }) => {
                             ? publications.find((pub) => pub._id === selectedPublicationId) || null
                             : null
                     }
-                    handleSubmitPublication={handleSubmitPublication}
                 />
             )}
         </div>

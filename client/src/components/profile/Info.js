@@ -41,18 +41,15 @@ const Info = ({ id, auth, profile, dispatch }) => {
 
                         <div className="info_content">
                             <div className="info_content_title">
-                                <h2>{user.username}</h2>
+                                <h2>{user.fullname}({user.username})</h2>
                                 {
                                     user._id === auth.user._id
                                         ? <button className="btn btn-outline-info"
                                             onClick={() => setOnEdit(true)}>
                                             Edit Profile
                                         </button>
-
                                         : <FollowBtn user={user} />
                                 }
-
-
                             </div>
 
                             <div className="follow_btn">
@@ -63,15 +60,10 @@ const Info = ({ id, auth, profile, dispatch }) => {
                                     {user.following.length} Following
                                 </span>
                             </div>
-
-                            <h6>{user.fullname}</h6>
-                            <p className="m-0">{user.institution}</p>
-                            <h6 className="m-0">***{user.email}</h6>
-                            <h6 className="m-0">{user.skill.join(" | ")}</h6>
-                            <a href={user.website} target="_blank" rel="noreferrer">
-                                {user.website}
-                            </a>
                             <p>{user.story}</p>
+                            <p className="m-0">{user.institution}</p>
+                            <h6 className="m-0">{user.skill.join(" | ")}</h6>
+                            <a href={user.website} target="_blank" rel="noreferrer">{user.website}</a>
                         </div>
 
                         {
